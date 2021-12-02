@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.stephane.domain.entities.Personne;
 import org.stephane.domain.port.out.personne.Save;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PersonneBusinessTest {
@@ -29,7 +31,7 @@ class PersonneBusinessTest {
 
         @Override
         public Personne execute(Personne personne) {
-            return null;
+            return Personne.Builder.newInstance().clone(personne).id(UUID.randomUUID().toString()).build();
         }
     }
 }
