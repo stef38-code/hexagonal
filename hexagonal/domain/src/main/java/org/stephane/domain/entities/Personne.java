@@ -83,6 +83,11 @@ public class Personne {
             this.prenom = prenom;
             return this;
         }
+        public Builder dateNaissance(LocalDate dateNaissance)
+        {
+            this.dateNaissance = dateNaissance;
+            return this;
+        }
         public Personne build()
         {
             return new Personne(this);
