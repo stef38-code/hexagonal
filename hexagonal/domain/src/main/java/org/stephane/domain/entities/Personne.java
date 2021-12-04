@@ -1,5 +1,7 @@
 package org.stephane.domain.entities;
 
+import org.stephane.domain.outils.OutilsValidation;
+
 import java.time.LocalDate;
 
 
@@ -90,7 +92,17 @@ public class Personne {
         }
         public Personne build()
         {
+            validate();
             return new Personne(this);
+        }
+        private void validate() throws IllegalStateException {
+            StringBuilder mb = new StringBuilder();
+            OutilsValidation.notNullNotEmpty("nom",this.nom,mb);
+            OutilsValidation.notNullNotEmpty("prenom",this.prenom,mb);
+            OutilsValidation.notNull("date de naissance",this.dateNaissance,mb);
+            if (mb.length() > 0) {
+                throw new IllegalStateException(mb.toString());
+            }
         }
     }
 }

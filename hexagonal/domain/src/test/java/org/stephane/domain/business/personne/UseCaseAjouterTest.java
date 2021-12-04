@@ -34,19 +34,6 @@ class UseCaseAjouterTest {
         assertThat(resultat.getDateNaissance()).isEqualTo(personne.getDateNaissance());
     }
 
-    @Test
-    void modifierUnePersonne() {
-    }
-
-    @Test
-    void supprimerUnePersonne() {
-    }
-
-    @Test
-    void testSupprimerUnePersonne() {
-    }
-
-
     private static class MockEnregistrerPersonne implements Enregistrer {
 
         @Override
