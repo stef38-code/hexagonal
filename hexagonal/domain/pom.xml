@@ -10,6 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>domain</artifactId>
+    <properties>
+        <encoding>UTF-8</encoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
+    </properties>
     <dependencies>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
@@ -21,13 +28,27 @@
             <artifactId>assertj-core</artifactId>
             <version>3.19.0</version>
         </dependency>
-
+        <!-- controle architecture -->
+        <dependency>
+            <groupId>com.tngtech.archunit</groupId>
+            <artifactId>archunit-junit5</artifactId>
+            <version>0.22.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
 
 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M4</version>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

@@ -12,7 +12,7 @@ class PersonneTest {
                 .id("1234567890")
                 .nom("Solomon")
                 .prenom("Castro")
-                .dateNaissance(LocalDate.now().minusYears(30))
+                .dateNaissance(LocalDate.of(1991,12,4))
                 .build();
         Assertions.assertThat(personne.toString()).hasToString("Personne{id='1234567890', nom='Solomon', prenom='Castro', dateNaissance=1991-12-04}");
     }
