@@ -2,26 +2,28 @@ package org.stephane.domain.business.personne;
 
 import org.junit.jupiter.api.Test;
 import org.stephane.domain.entities.Personne;
-import org.stephane.domain.mock.in.personne.MockAjouterReponse;
-import org.stephane.domain.mock.in.personne.MockEnregistrerPersonne;
+import org.stephane.domain.mock.in.personne.MockModifierPersonne;
+import org.stephane.domain.mock.in.personne.MockModifierReponse;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class UseCaseAjouterTest {
-    MockEnregistrerPersonne mockRepository = new MockEnregistrerPersonne();
-    MockAjouterReponse mockReponse = new MockAjouterReponse();
+class UseCaseModifierTest {
+    MockModifierPersonne mockRepository = new MockModifierPersonne();
+    MockModifierReponse mockReponse = new MockModifierReponse();
 
     @Test
-    void ajouter() {
-        UseCaseAjouter business = new UseCaseAjouter();
+    void modifierUnePersonne() {
+        UseCaseModifier business = new UseCaseModifier();
         Personne personne = Personne.Builder.newInstance()
+                .id(UUID.randomUUID().toString())
                 .nom("Solomon")
                 .prenom("Castro")
                 .dateNaissance(LocalDate.now().minusYears(30))
                 .build();
-        business.ajouterUnePersonne(personne, mockRepository, mockReponse);
+        business.modifierUnePersonne(personne, mockRepository, mockReponse);
         Personne resultat = mockReponse.recuperer();
 
 

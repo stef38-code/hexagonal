@@ -8,7 +8,7 @@ public class UseCaseSupprimer {
 
     public void supprimerUnePersonne(Personne personne, Supprimer supprimer, SupprimerReponse reponse){
         supprimer.execute(personne);
-        reponse.donner(personne);
+        reponse.donner(personne.getId());
     }
     public void supprimerUnePersonne(String idPersonne, Supprimer supprimer, SupprimerReponse reponse){
         supprimer.execute(idPersonne);
