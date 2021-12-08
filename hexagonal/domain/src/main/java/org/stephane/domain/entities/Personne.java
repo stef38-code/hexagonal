@@ -6,6 +6,8 @@ import org.stephane.domain.outils.OutilsValidation;
 import org.stephane.domain.outils.ValidationException;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class Personne {
@@ -13,6 +15,7 @@ public class Personne {
     private final String nom;
     private final String prenom;
     private final LocalDate dateNaissance;
+    private final Set<Adresse> adresses;
 
     public Personne(Builder builder)
     {
@@ -20,6 +23,26 @@ public class Personne {
         this.nom = builder.nom;
         this.prenom = builder.prenom;
         this.dateNaissance = builder.dateNaissance;
+        this.adresses = builder.adresses;
+    }
+
+    public void setId(String id) {
+        id = id;
+    }
+
+    public void setNom(String nom) {
+        nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        prenom = prenom;
+    }
+
+    public void setDateNaissance(LocalDate dateNaissance) {
+        dateNaissance = dateNaissance;
+    }
+    public void getAdresses(Set<Adresse> adresses) {
+        adresses = adresses;
     }
 
     public String getId() {
@@ -38,6 +61,10 @@ public class Personne {
         return dateNaissance;
     }
 
+    public Set<Adresse> getAdresses() {
+        return adresses;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Personne{");
@@ -45,6 +72,7 @@ public class Personne {
         sb.append(", nom='").append(nom).append('\'');
         sb.append(", prenom='").append(prenom).append('\'');
         sb.append(", dateNaissance=").append(dateNaissance);
+        sb.append(", adresses=").append(adresses);
         sb.append('}');
         return sb.toString();
     }
@@ -58,7 +86,7 @@ public class Personne {
         private String nom;
         private String prenom;
         private LocalDate dateNaissance;
-
+        private Set<Adresse> adresses = new HashSet<>();
         public static Builder newInstance()
         {
             return new Builder();
@@ -71,6 +99,7 @@ public class Personne {
             nom= personne.getNom();
             prenom= personne.getPrenom();
             dateNaissance= personne.getDateNaissance();
+            adresses= personne.getAdresses();
             return this;
         }
         public Builder id(String id)
@@ -91,6 +120,11 @@ public class Personne {
         public Builder dateNaissance(LocalDate dateNaissance)
         {
             this.dateNaissance = dateNaissance;
+            return this;
+        }
+        public Builder adresses(Set<Adresse> adresses)
+        {
+            this.adresses = adresses;
             return this;
         }
         @Override

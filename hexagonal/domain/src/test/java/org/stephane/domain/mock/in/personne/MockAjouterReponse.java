@@ -1,9 +1,9 @@
 package org.stephane.domain.mock.in.personne;
 
 import org.stephane.domain.entities.Personne;
-import org.stephane.domain.port.in.personne.AjouterReponse;
+import org.stephane.domain.port.in.AjouterReponse;
 
-public class MockAjouterReponse implements AjouterReponse {
+public class MockAjouterReponse extends AjouterReponse<Personne> {
     private Personne resultat;
 
     @Override
