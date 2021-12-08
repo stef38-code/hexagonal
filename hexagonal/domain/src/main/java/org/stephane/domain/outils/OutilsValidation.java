@@ -1,27 +1,29 @@
 package org.stephane.domain.outils;
 
-public class OutilsValidation {
-    private OutilsValidation() {
-    }
+import java.util.Map;
 
-    public static void notNullNotEmpty(String champ, String value, StringBuilder mb) {
+public class OutilsValidation {
+
+    protected OutilsValidation() {
+    }
+    public static void notNullNotEmpty(String champ, String value, Map<String,String> erreurs) {
         if (isNull(value)) {
-            mb.append("Le ".concat(champ).concat(" est obligatoire !!"));
+            erreurs.put(champ,"Le ".concat(champ).concat(" est obligatoire !!"));
         } else {
             if (isEmpty(value)) {
-                mb.append("Le ".concat(champ).concat(" ne peut pas être vide !!"));
+                erreurs.put(champ,"Le ".concat(champ).concat(" ne peut pas être vide !!"));
             }
         }
     }
 
-    public static void notNull(String champ, Object value, StringBuilder mb) {
+    public static void notNull(String champ, Object value, Map<String,String> erreurs) {
         if (isNull(value)) {
-            mb.append("Le ".concat(champ).concat(" est obligatoire !!"));
+            erreurs.put(champ,"Le ".concat(champ).concat(" est obligatoire !!"));
         }
     }
-    public static void notEmpty(String champ, String value, StringBuilder mb) {
+    public static void notEmpty(String champ, String value, Map<String,String> erreurs) {
         if (isEmpty(value)) {
-            mb.append("Le ".concat(champ).concat(" ne peut pas être vide !!"));
+            erreurs.put(champ,"Le ".concat(champ).concat(" ne peut pas être vide !!"));
         }
     }
 

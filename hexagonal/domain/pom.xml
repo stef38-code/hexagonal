@@ -28,13 +28,13 @@
             <artifactId>assertj-core</artifactId>
             <version>3.19.0</version>
         </dependency>
-        <!-- controle architecture -->
-        <dependency>
+        <!-- controle architecture a voir plus tard-->
+<!--        <dependency>
             <groupId>com.tngtech.archunit</groupId>
             <artifactId>archunit-junit5</artifactId>
             <version>0.22.0</version>
             <scope>test</scope>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
 

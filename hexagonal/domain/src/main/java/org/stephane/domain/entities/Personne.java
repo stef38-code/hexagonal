@@ -1,6 +1,9 @@
 package org.stephane.domain.entities;
 
+import org.stephane.domain.entities.builder.BuilderValidation;
+import org.stephane.domain.entities.builder.ErreursValidations;
 import org.stephane.domain.outils.OutilsValidation;
+import org.stephane.domain.outils.ValidationException;
 
 import java.time.LocalDate;
 
@@ -50,7 +53,7 @@ public class Personne {
      * Builder
       */
 
-    public static class Builder {
+    public static class Builder extends ErreursValidations implements BuilderValidation<Personne>  {
         private String id;
         private String nom;
         private String prenom;
@@ -90,18 +93,19 @@ public class Personne {
             this.dateNaissance = dateNaissance;
             return this;
         }
+        @Override
         public Personne build()
         {
             validate();
             return new Personne(this);
         }
-        private void validate() throws IllegalStateException {
-            StringBuilder mb = new StringBuilder();
-            OutilsValidation.notNullNotEmpty("nom",this.nom,mb);
-            OutilsValidation.notNullNotEmpty("prenom",this.prenom,mb);
-            OutilsValidation.notNull("date de naissance",this.dateNaissance,mb);
-            if (mb.length() > 0) {
-                throw new IllegalStateException(mb.toString());
+        @Override
+        public void validate()  {
+            OutilsValidation.notNullNotEmpty("nom",this.nom,getErreurs());
+            OutilsValidation.notNullNotEmpty("prenom",this.prenom,getErreurs());
+            OutilsValidation.notNull("date de naissance",this.dateNaissance,getErreurs());
+            if (nombreErreurs() > 0) {
+                throw new ValidationException(getErreurs());
             }
         }
     }
