@@ -43,7 +43,7 @@ Exemple :
 package org.stephane.domain.business;
 
 import org.stephane.domain.entities.Personne;
-import org.stephane.domain.port.in.personne.AjouterReponse;
+import org.stephane.domain.port.in.personne.AjouterUnePersonneReponse;
 import org.stephane.domain.port.out.personne.Enregistrer;
 
 public class UseCasePersonne {
@@ -90,7 +90,7 @@ package org.stephane.domain.business;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.stephane.domain.entities.Personne;
-import org.stephane.domain.port.in.personne.AjouterReponse;
+import org.stephane.domain.port.in.personne.AjouterUnePersonneReponse;
 import org.stephane.domain.port.out.personne.Enregistrer;
 
 import java.time.LocalDate;

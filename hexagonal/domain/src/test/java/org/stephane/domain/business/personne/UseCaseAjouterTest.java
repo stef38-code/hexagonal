@@ -2,7 +2,7 @@ package org.stephane.domain.business.personne;
 
 import org.junit.jupiter.api.Test;
 import org.stephane.domain.entities.Personne;
-import org.stephane.domain.mock.in.personne.MockAjouterReponse;
+import org.stephane.domain.mock.in.personne.MockAjouterUnePersonneReponse;
 import org.stephane.domain.mock.in.personne.MockEnregistrerPersonne;
 
 import java.time.LocalDate;
@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class UseCaseAjouterTest {
     MockEnregistrerPersonne mockRepository = new MockEnregistrerPersonne();
-    MockAjouterReponse mockReponse = new MockAjouterReponse();
+    MockAjouterUnePersonneReponse mockReponse = new MockAjouterUnePersonneReponse();
 
     @Test
     void ajouter() {

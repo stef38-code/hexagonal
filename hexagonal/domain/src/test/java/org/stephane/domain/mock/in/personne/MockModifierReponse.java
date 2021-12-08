@@ -1,7 +1,6 @@
 package org.stephane.domain.mock.in.personne;
 
 import org.stephane.domain.entities.Personne;
-import org.stephane.domain.port.in.personne.AjouterReponse;
 import org.stephane.domain.port.in.personne.ModifierReponse;
 
 public class MockModifierReponse implements ModifierReponse {

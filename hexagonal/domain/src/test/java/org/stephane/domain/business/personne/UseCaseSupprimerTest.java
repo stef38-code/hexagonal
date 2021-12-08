@@ -2,8 +2,6 @@ package org.stephane.domain.business.personne;
 
 import org.junit.jupiter.api.Test;
 import org.stephane.domain.entities.Personne;
-import org.stephane.domain.mock.in.personne.MockAjouterReponse;
-import org.stephane.domain.mock.in.personne.MockEnregistrerPersonne;
 import org.stephane.domain.mock.in.personne.MockSupprimerPersonne;
 import org.stephane.domain.mock.in.personne.MockSupprimerReponse;
 
@@ -11,7 +9,6 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class UseCaseSupprimerTest {
     MockSupprimerPersonne mockRepository = new MockSupprimerPersonne();
