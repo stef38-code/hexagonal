@@ -1,4 +1,4 @@
-package org.stphane.output.entities;
+package org.stephane.output.entities;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;

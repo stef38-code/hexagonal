@@ -4,11 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.stephane.in.dto.PersonneDto;
-import org.stephane.in.personne.AjouterUnePersonneService;
+import org.stephane.in.service.AjouterUnePersonneService;
 
-import java.util.Collection;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(
@@ -17,8 +21,9 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class PersonneController {
     private final AjouterUnePersonneService ajouterUnePersonneService;
+
     @PostMapping
-    public ResponseEntity<PersonneDto> enregistrer(@RequestBody PersonneDto personneDto) {
+    public ResponseEntity<PersonneDto> enregistrer(@Valid @RequestBody PersonneDto personneDto) {
         personneDto = ajouterUnePersonneService.ajouter(personneDto);
         return new ResponseEntity<>(personneDto, HttpStatus.OK);
     }

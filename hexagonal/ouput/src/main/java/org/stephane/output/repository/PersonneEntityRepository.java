@@ -1,8 +1,8 @@
-package org.stphane.output.repository;
+package org.stephane.output.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.stphane.output.entities.PersonneEntity;
+import org.stephane.output.entities.PersonneEntity;
 
 @Repository
 public interface PersonneEntityRepository extends JpaRepository<PersonneEntity, String> {
