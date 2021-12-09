@@ -8,9 +8,11 @@ Le premier but de cette solution est de protéger la partie métier/business d'u
 # Partie Metier/Domain/Business du projet
 Celui-ci ne doit pas voir de dépendance avec des FrameWork, il doit être le plus pure possible.
 Le but de ce module est d'avoir un impact mineur en cas de changement de version de Java
-Donc pas de :
+
+![](./doc/dangergeneralpetit.png)
 * @Controller, @Service,@Repository,@Compoment
 * Mapper
+* cette partie ne doit pas importer un seul élément du `in` ou du `out`
 * etc...
 
 L'avantage de cette solution

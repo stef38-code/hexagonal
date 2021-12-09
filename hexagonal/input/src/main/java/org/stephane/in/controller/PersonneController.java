@@ -23,12 +23,12 @@ public class PersonneController {
         return new ResponseEntity<>(personneDto, HttpStatus.OK);
     }
 
-    @GetMapping
+    /*@GetMapping
     public ResponseEntity<Collection<PersonneDto>> lister() {
         //return new ResponseEntity<>(categoriePortIn.lister(), HttpStatus.OK);
-    }
+    }*/
 
-    @GetMapping("/{id}")
+   /* @GetMapping("/{id}")
     public ResponseEntity<CategorieDto> editer(@PathVariable final String id) {
         CategorieDto categorieDto = categoriePortIn.editer(id);
         CategorieResource.addLinkByRef(categorieDto);
@@ -51,5 +51,5 @@ public class PersonneController {
         categoriePortIn.modifier(
                 entityController.getAncienneCategorie(), entityController.getNouvelleCategorie());
         return new ResponseEntity<>(HttpStatus.OK);
-    }
+    }*/
 }

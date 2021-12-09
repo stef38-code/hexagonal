@@ -33,7 +33,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.5</version>
+                <version>0.8.7</version>
                 <configuration>
                     <dataFile>${sonar.jacoco.reportPath}</dataFile>
                     <destFile>${sonar.jacoco.reportPath}</destFile>
@@ -58,7 +58,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M4</version>
+                <version>2.22.2</version>
             </plugin>
             <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
