@@ -138,4 +138,7 @@ class UseCasePersonneTest {
     }
 }
 ```
-
+# Génération du rapport
+````shell
+mvn package site site:stage
+````
