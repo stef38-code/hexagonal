@@ -2,9 +2,12 @@ package org.stephane.in.controller;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.ResultActions;
@@ -17,7 +20,9 @@ import org.stephane.in.service.AjouterUnePersonneService;
 import tools.FileTools;
 import tools.JsonTools;
 
-import java.time.LocalDate;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = {PersonneController.class})
 @ExtendWith(SpringExtension.class)
@@ -39,6 +44,7 @@ class PersonneControllerTest {
                 .perform(requestBuilder);
         actualPerformResult.andExpect(MockMvcResultMatchers.status().is(200));
     }
+
     @Test
     void enregistrer_statusKo() throws Exception {
         String content = FileTools.getResourceFileAsString("personne_error.json");
@@ -49,6 +55,29 @@ class PersonneControllerTest {
                 .build()
                 .perform(requestBuilder);
         actualPerformResult.andExpect(MockMvcResultMatchers.status().is(400));
+    }
+
+    @Test
+    void sansSpring() {
+        //Mock
+        AjouterUnePersonneService ajouterUnePersonneService = mock(AjouterUnePersonneService.class);
+        //Instance du controler
+        PersonneController controller = new PersonneController(ajouterUnePersonneService);
+        //obj retouné par le mock
+        PersonneDto personneDto = new PersonneDto();
+        personneDto = JsonTools.readObjectToJsonFile(personneDto, "personne.json");
+        //
+        when(ajouterUnePersonneService.ajouter(ArgumentMatchers.<PersonneDto>any())).thenReturn(personneDto);
+        //
+        ResponseEntity<PersonneDto> responseEntity = controller.enregistrer(personneDto);
+        //controle
+        assertThat(responseEntity).isNotNull();
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        PersonneDto body = responseEntity.getBody();
+        assertThat(body).isNotNull();
+        //compare les obj
+        assertThat(body).usingRecursiveComparison().isEqualTo(personneDto);
+
     }
 }
 

@@ -7,7 +7,7 @@ import org.stephane.in.dto.PersonneDto;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-12-09T14:33:19+0100",
+    date = "2021-12-10T08:29:30+0100",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.12 (Azul Systems, Inc.)"
 )
 public class PersonneDtoMapperImpl implements PersonneDtoMapper {

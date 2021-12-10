@@ -16,8 +16,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @ContextConfiguration(classes = PersonneEntityRepository.class)
 @RequiredArgsConstructor
-@EnableJpaRepositories(basePackages = {"org.stphane.output.repository"})
-@EntityScan({"org.stphane.output.entities"})
+@EnableJpaRepositories(basePackages = {"org.stephane.output.repository"})
+@EntityScan({"org.stephane.output.entities"})
 class PersonneEntityRepositoryTest {
     @Autowired
     private PersonneEntityRepository repository;
