@@ -1,12 +1,9 @@
 package org.stephane.domain.mock.in.personne;
 
 import org.stephane.domain.entities.Personne;
-import org.stephane.domain.port.out.personne.Enregistrer;
-import org.stephane.domain.port.out.personne.Modifier;
+import org.stephane.domain.port.out.Modifier;
 
-import java.util.UUID;
-
-public class MockModifierPersonne implements Modifier {
+public class MockModifierPersonne extends Modifier<Personne> {
     @Override
     public Personne execute(Personne personne) {
         return personne;
