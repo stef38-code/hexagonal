@@ -18,7 +18,7 @@ class PersonneTest {
                 .prenom("Castro")
                 .dateNaissance(LocalDate.of(1991, 12, 4))
                 .build();
-        assertThat(personne.toString()).hasToString("Personne{id='1234567890', nom='Solomon', prenom='Castro', dateNaissance=1991-12-04}");
+        assertThat(personne.toString()).hasToString("Personne{id='1234567890', nom='Solomon', prenom='Castro', dateNaissance=1991-12-04, adresses=[]}");
     }
 
     @Test
