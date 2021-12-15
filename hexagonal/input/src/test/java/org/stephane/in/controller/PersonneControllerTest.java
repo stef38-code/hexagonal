@@ -67,7 +67,7 @@ class PersonneControllerTest {
         PersonneDto personneDto = new PersonneDto();
         personneDto = JsonTools.readObjectToJsonFile(personneDto, "personne.json");
         //
-        when(ajouterService.ajouter(ArgumentMatchers.<PersonneDto>any())).thenReturn(personneDto);
+        when(ajouterService.executer(ArgumentMatchers.<PersonneDto>any())).thenReturn(personneDto);
         //
         ResponseEntity<PersonneDto> responseEntity = controller.enregistrer(personneDto);
         //controle

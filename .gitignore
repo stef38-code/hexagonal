@@ -1,1 +1,6 @@
 /hexagonal/.idea/
+/hexagonal/.jpb/
+/hexagonal/input/target
+/hexagonal/domain/target
+/hexagonal/ouput/target
+

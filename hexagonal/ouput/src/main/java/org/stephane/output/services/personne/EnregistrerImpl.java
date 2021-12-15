@@ -1,6 +1,7 @@
 package org.stephane.output.services.personne;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.stephane.domain.entities.Personne;
 import org.stephane.domain.port.out.Enregistrer;
@@ -11,6 +12,7 @@ import org.stephane.output.repository.PersonneEntityRepository;
 
 @RequiredArgsConstructor
 @Component
+@Qualifier("EnregistrerPersonne")
 public class EnregistrerImpl extends Enregistrer<Personne> {
     private final PersonneEntityRepository repository;
     private final CreateMapperEntity<PersonneEntity,Personne> mapper;
