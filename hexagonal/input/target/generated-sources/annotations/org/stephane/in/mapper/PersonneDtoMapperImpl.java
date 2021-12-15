@@ -7,13 +7,13 @@ import org.stephane.in.dto.PersonneDto;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-12-10T08:29:30+0100",
+    date = "2021-12-13T17:14:03+0100",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.12 (Azul Systems, Inc.)"
 )
-public class PersonneDtoMapperImpl implements PersonneDtoMapper {
+public class PersonneDtoMapperImpl extends PersonneDtoMapper {
 
     @Override
-    public PersonneDto to(Personne personne) {
+    public PersonneDto toInput(Personne personne) {
         if ( personne == null ) {
             return null;
         }
@@ -29,7 +29,7 @@ public class PersonneDtoMapperImpl implements PersonneDtoMapper {
     }
 
     @Override
-    public Personne to(PersonneDto personneDto) {
+    public Personne toDomain(PersonneDto personneDto) {
         if ( personneDto == null ) {
             return null;
         }
@@ -37,6 +37,11 @@ public class PersonneDtoMapperImpl implements PersonneDtoMapper {
         Builder builder = null;
 
         Personne personne = new Personne( builder );
+
+        personne.setId( personneDto.getId() );
+        personne.setNom( personneDto.getNom() );
+        personne.setPrenom( personneDto.getPrenom() );
+        personne.setDateNaissance( personneDto.getDateNaissance() );
 
         return personne;
     }

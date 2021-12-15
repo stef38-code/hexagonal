@@ -1,6 +1,7 @@
-package org.stephane.domain.business.personne;
+package org.stephane.domain.business;
 
 import org.junit.jupiter.api.Test;
+import org.stephane.domain.business.personne.UseCaseModifierPersonneImpl;
 import org.stephane.domain.entities.Personne;
 import org.stephane.domain.mock.in.personne.MockModifierPersonne;
 import org.stephane.domain.mock.in.personne.MockModifierReponse;
@@ -16,14 +17,14 @@ class UseCaseModifierTest {
 
     @Test
     void modifierUnePersonne() {
-        UseCaseModifier business = new UseCaseModifier();
+        UseCaseModifier<Personne> business = new UseCaseModifierPersonneImpl();
         Personne personne = Personne.Builder.newInstance()
                 .id(UUID.randomUUID().toString())
                 .nom("Solomon")
                 .prenom("Castro")
                 .dateNaissance(LocalDate.now().minusYears(30))
                 .build();
-        business.modifierUnePersonne(personne, mockRepository, mockReponse);
+        business.executer(personne, mockRepository, mockReponse);
         Personne resultat = mockReponse.recuperer();
 
 

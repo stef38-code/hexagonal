@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.stephane.in.dto.PersonneDto;
-import org.stephane.in.service.AjouterUnePersonneService;
+import org.stephane.in.service.personne.AjouterService;
 import tools.FileTools;
 import tools.JsonTools;
 
@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(SpringExtension.class)
 class PersonneControllerTest {
     @MockBean
-    private AjouterUnePersonneService ajouterUnePersonneService;
+    private AjouterService ajouterService;
 
     @Autowired
     private PersonneController personneController;
@@ -60,14 +60,14 @@ class PersonneControllerTest {
     @Test
     void sansSpring() {
         //Mock
-        AjouterUnePersonneService ajouterUnePersonneService = mock(AjouterUnePersonneService.class);
+        AjouterService<PersonneDto> ajouterService = mock(AjouterService.class);
         //Instance du controler
-        PersonneController controller = new PersonneController(ajouterUnePersonneService);
+        PersonneController controller = new PersonneController(ajouterService);
         //obj retouné par le mock
         PersonneDto personneDto = new PersonneDto();
         personneDto = JsonTools.readObjectToJsonFile(personneDto, "personne.json");
         //
-        when(ajouterUnePersonneService.ajouter(ArgumentMatchers.<PersonneDto>any())).thenReturn(personneDto);
+        when(ajouterService.ajouter(ArgumentMatchers.<PersonneDto>any())).thenReturn(personneDto);
         //
         ResponseEntity<PersonneDto> responseEntity = controller.enregistrer(personneDto);
         //controle

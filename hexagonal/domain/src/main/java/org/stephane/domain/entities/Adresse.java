@@ -4,6 +4,8 @@ import org.stephane.domain.entities.builder.BuilderValidation;
 import org.stephane.domain.entities.builder.ErreursValidations;
 import org.stephane.domain.outils.ValidationException;
 
+import java.util.Set;
+
 import static org.stephane.domain.outils.AdresseValidation.notNullNotEmpty;
 import static org.stephane.domain.outils.AdresseValidation.valideCodePostal;
 
@@ -16,6 +18,7 @@ public class Adresse {
     private final String codePostal;
     private final String ville;
     private final String pays;
+    private final Set<Personne> personnes;
 
     public Adresse(Adresse.Builder builder) {
         this.id = builder.id;
@@ -26,6 +29,43 @@ public class Adresse {
         this.codePostal = builder.codePostal;
         this.ville = builder.ville;
         this.pays = builder.pays;
+        this.personnes = builder.personnes;
+    }
+
+    public void setId(String id) {
+        id= id;
+    }
+
+    public void setAppartementEscalierEtage(String appartementEscalierEtage) {
+        appartementEscalierEtage= appartementEscalierEtage;
+    }
+
+    public void setBatimentResidence(String batimentResidence) {
+        batimentResidence= batimentResidence;
+    }
+
+    public void setNumeroNomVoie(String numeroNomVoie) {
+        numeroNomVoie= numeroNomVoie;
+    }
+
+    public void setComplementAdresse(String complementAdresse) {
+        complementAdresse= complementAdresse;
+    }
+
+    public void setCodePostal(String codePostal) {
+        codePostal= codePostal;
+    }
+
+    public void setVille(String ville) {
+        ville=ville;
+    }
+
+    public void setPays(String pays) {
+        pays =pays;
+    }
+
+    public void setPersonnes(Set<Personne> personnes) {
+        personnes=personnes;
     }
 
     public String getId() {
@@ -60,6 +100,10 @@ public class Adresse {
         return pays;
     }
 
+    public Set<Personne> getPersonnes() {
+        return personnes;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Adresse{");
@@ -71,6 +115,7 @@ public class Adresse {
         sb.append(", codePostal='").append(codePostal).append('\'');
         sb.append(", ville='").append(ville).append('\'');
         sb.append(", pays='").append(pays).append('\'');
+        sb.append(", personnes=").append(personnes);
         sb.append('}');
         return sb.toString();
     }
@@ -88,6 +133,7 @@ public class Adresse {
         private String complementAdresse;
         private String codePostal;
         private String ville;
+        private Set<Personne> personnes;
 
         private Builder() {
         }
@@ -96,37 +142,7 @@ public class Adresse {
             return new Adresse.Builder();
         }
 
-        public String getId() {
-            return id;
-        }
 
-        public String getAppartementEscalierEtage() {
-            return appartementEscalierEtage;
-        }
-
-        public String getPays() {
-            return pays;
-        }
-
-        public String getBatimentResidence() {
-            return batimentResidence;
-        }
-
-        public String getNumeroNomVoie() {
-            return numeroNomVoie;
-        }
-
-        public String getComplementAdresse() {
-            return complementAdresse;
-        }
-
-        public String getCodePostal() {
-            return codePostal;
-        }
-
-        public String getVille() {
-            return ville;
-        }
 
         public Adresse.Builder clone(Adresse adresse) {
             id = adresse.getId();
@@ -137,6 +153,7 @@ public class Adresse {
             this.codePostal = adresse.getCodePostal();
             this.ville = adresse.getVille();
             this.pays = adresse.getPays();
+            this.personnes = adresse.getPersonnes();
             return this;
         }
 
@@ -152,6 +169,10 @@ public class Adresse {
 
         public Adresse.Builder pays(String pays) {
             this.pays = pays;
+            return this;
+        }
+        public Adresse.Builder personnes(Set<Personne> personnes) {
+            this.personnes = personnes;
             return this;
         }
 

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.stephane.in.dto.PersonneDto;
-import org.stephane.in.service.AjouterUnePersonneService;
+import org.stephane.in.service.personne.AjouterService;
 
 import javax.validation.Valid;
 
@@ -19,11 +19,11 @@ import javax.validation.Valid;
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE})
 @RequiredArgsConstructor
 public class PersonneController {
-    private final AjouterUnePersonneService ajouterUnePersonneService;
+    private final AjouterService<PersonneDto> ajouterService;
 
     @PostMapping
     public ResponseEntity<PersonneDto> enregistrer(@Valid @RequestBody PersonneDto personneDto) {
-        personneDto = ajouterUnePersonneService.ajouter(personneDto);
+        personneDto = ajouterService.ajouter(personneDto);
         return new ResponseEntity<>(personneDto, HttpStatus.OK);
     }
 

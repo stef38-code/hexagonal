@@ -1,6 +1,7 @@
-package org.stephane.domain.business.personne;
+package org.stephane.domain.business;
 
 import org.junit.jupiter.api.Test;
+import org.stephane.domain.business.personne.UseCaseAjouterPersonneImpl;
 import org.stephane.domain.entities.Personne;
 import org.stephane.domain.mock.in.personne.MockAjouterUnePersonneReponse;
 import org.stephane.domain.mock.in.personne.MockEnregistrerPersonne;
@@ -15,13 +16,13 @@ class UseCaseAjouterTest {
 
     @Test
     void ajouter() {
-        UseCaseAjouter business = new UseCaseAjouter();
+        UseCaseAjouter<Personne> business = new UseCaseAjouterPersonneImpl();
         Personne personne = Personne.Builder.newInstance()
                 .nom("Solomon")
                 .prenom("Castro")
                 .dateNaissance(LocalDate.now().minusYears(30))
                 .build();
-        business.ajouterUnePersonne(personne, mockRepository, mockReponse);
+        business.executer(personne, mockRepository, mockReponse);
         Personne resultat = mockReponse.recuperer();
 
 

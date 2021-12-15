@@ -3,13 +3,12 @@ package org.stephane.output.entities;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -18,12 +17,11 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @Entity
-
 @Table(name="personne")
 public class PersonneEntity {
     @Id
     @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     private String id;
     @NotEmpty
     private String nom;
@@ -31,4 +29,9 @@ public class PersonneEntity {
     private String prenom;
     @NotNull
     private LocalDate dateNaissance;
+    @ManyToMany(mappedBy = "personnes",cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    private Set<AdresseEntity> adresses = new HashSet<>();
 }

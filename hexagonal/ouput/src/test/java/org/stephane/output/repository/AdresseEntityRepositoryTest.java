@@ -15,36 +15,24 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataJpaTest(properties = {
-        "spring.main.banner-mode=off",
-        "spring.jpa.properties.hibernate.show_sql=true",
-        "spring.jpa.properties.hibernate.format_sql=true",
-        "logging.level.ROOT= DEBUG",
-        "logging.level.org.springframework.test.context.transaction= DEBUG",
-        "logging.level.org.hibernate.SQL= DEBUG",
-        "logging.level.org.hibernate.type.descriptor.sql=trace"
-})
-@ContextConfiguration(classes = PersonneEntityRepository.class)
+@DataJpaTest
+@ContextConfiguration(classes = AdresseEntityRepository.class)
 @RequiredArgsConstructor
 @EnableJpaRepositories(basePackages = {"org.stephane.output.repository"})
 @EntityScan({"org.stephane.output.entities"})
 @Slf4j
-class PersonneEntityRepositoryTest {
+class AdresseEntityRepositoryTest {
     @Autowired
-    private PersonneEntityRepository repository;
+    private AdresseEntityRepository repository;
 
     @Test
-    void createUnepersonne(){
+    void createUneAdresseAvecUnePersonne() {
         PersonneEntity personne = new PersonneEntity();
-        personne.setNom("DYLAN");
-        personne.setPrenom("BOB");
-        personne.setDateNaissance(LocalDate.of(1980,5,25));
-        repository.save(personne);
-        assertThat(personne).isNotNull();
-        assertThat(personne.getId()).isNotBlank();
-    }
-    @Test
-    void createUnepersonneAvecUneAdresse(){
+        personne.setNom("Timothée");
+        personne.setPrenom("Maurice");
+        personne.setDateNaissance(LocalDate.of(1992, 2, 29));
+
+
         AdresseEntity adresse = new AdresseEntity();
         adresse.setAppartementEscalierEtage("Appart. 18");
         adresse.setBatimentResidence("Bat. paradis");
@@ -53,18 +41,13 @@ class PersonneEntityRepositoryTest {
         adresse.setCodePostal("53039");
         adresse.setVille("PasquierVille");
         adresse.setPays("France");
+        adresse.getPersonnes().add(personne);
 
-        PersonneEntity personne = new PersonneEntity();
-        personne.setNom("DYLAN");
-        personne.setPrenom("BOB");
-        personne.setDateNaissance(LocalDate.of(1980,5,25));
-        personne.getAdresses().add(adresse);
-
-        repository.save(personne);
-        assertThat(personne).isNotNull();
-        assertThat(personne.getId()).isNotBlank();
-        log.info("Id personne: {}",personne.getId());
+        repository.save(adresse);
+        assertThat(adresse).isNotNull();
         assertThat(adresse.getId()).isNotBlank();
         log.info("Id adresse: {}",adresse.getId());
+        assertThat(personne.getId()).isNotBlank();
+        log.info("Id personne: {}",personne.getId());
     }
 }
