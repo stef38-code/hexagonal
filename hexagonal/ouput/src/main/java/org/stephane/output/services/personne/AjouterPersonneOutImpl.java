@@ -3,15 +3,15 @@ package org.stephane.output.services.personne;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.stephane.domain.entities.Personne;
-import org.stephane.domain.port.out.personne.AjouterPersonne;
+import org.stephane.domain.port.out.personne.AjouterPersonneOut;
 import org.stephane.output.entities.PersonneEntity;
-import org.stephane.output.mapper.CreateMapperEntity;
+import org.stephane.output.mapper.factory.CreateMapperEntity;
 import org.stephane.output.mapper.TypeServiceMapperEntity;
 import org.stephane.output.repository.PersonneEntityRepository;
 
 @RequiredArgsConstructor
 @Component
-public class AjouterPersonneImpl extends CreateMapperEntity<PersonneEntity, Personne> implements AjouterPersonne {
+public class AjouterPersonneOutImpl extends CreateMapperEntity<PersonneEntity, Personne> implements AjouterPersonneOut {
     private final PersonneEntityRepository repository;
 
     @Override

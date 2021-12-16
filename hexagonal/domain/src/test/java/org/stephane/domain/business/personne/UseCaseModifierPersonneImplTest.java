@@ -1,10 +1,11 @@
-package org.stephane.domain.business;
+package org.stephane.domain.business.personne;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.stephane.domain.business.personne.UseCaseModifierPersonneImpl;
+import org.stephane.domain.business.UseCaseModifier;
+import org.stephane.domain.entities.Personne;
 import org.stephane.domain.entities.PersonneBuilder;
-import org.stephane.domain.mock.in.personne.MockModifierPersonne;
+import org.stephane.domain.mock.in.personne.MockModifierPersonneOut;
 import org.stephane.domain.mock.in.personne.MockModifierReponse;
 
 import java.time.LocalDate;
@@ -12,27 +13,27 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class UseCaseModifierTest {
-    MockModifierPersonne mockRepository;
+class UseCaseModifierPersonneImplTest {
+    MockModifierPersonneOut mockRepository;
     MockModifierReponse mockReponse;
 
     @BeforeEach
     void setUp() {
-        mockRepository = new MockModifierPersonne();
+        mockRepository = new MockModifierPersonneOut();
         mockReponse = new MockModifierReponse();
     }
 
     @Test
     void modifierUnePersonne() {
-        UseCaseModifier<org.stephane.domain.entities.Personne> business = new UseCaseModifierPersonneImpl();
-        org.stephane.domain.entities.Personne personne = PersonneBuilder.aPersonne()
+        UseCaseModifier<Personne> business = new UseCaseModifierPersonneImpl();
+        Personne personne = PersonneBuilder.aPersonne()
                 .id(UUID.randomUUID().toString())
                 .nom("Solomon")
                 .prenom("Castro")
                 .dateNaissance(LocalDate.now().minusYears(30))
                 .build();
         business.executer(personne, mockRepository, mockReponse);
-        org.stephane.domain.entities.Personne resultat = mockReponse.recuperer();
+        Personne resultat = mockReponse.recuperer();
 
 
         assertThat(resultat).isNotNull();

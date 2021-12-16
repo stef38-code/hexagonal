@@ -16,14 +16,14 @@ import java.util.UUID;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
-class AjouterPersonneImplTest {
-    private AjouterPersonneImpl ajouterPersonne;
+class AjouterPersonneOutImplTest {
+    private AjouterPersonneOutImpl ajouterPersonne;
     private PersonneEntityRepository repository;
 
     @BeforeEach
     void setUp() {
         repository = mock(PersonneEntityRepository.class);
-        ajouterPersonne = new AjouterPersonneImpl(repository);
+        ajouterPersonne = new AjouterPersonneOutImpl(repository);
     }
 
     @Test

@@ -1,5 +1,5 @@
 package org.stephane.domain.port.out;
 
-public interface Ajouter<D> {
+public interface ModifierOut<D> {
     D execute(D domain);
 }

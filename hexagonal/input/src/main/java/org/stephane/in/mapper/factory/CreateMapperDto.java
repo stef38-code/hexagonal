@@ -1,11 +1,11 @@
 package org.stephane.in.mapper.factory;
 
-public class CreateMapperDto<IN, DOM> {
-    public ServiceMapperDto<IN, DOM> getMapper(TypeServiceMapperDto mapperType) {
+public class CreateMapperDto<I, D> {
+    public ServiceMapperDto<I, D> getMapper(TypeServiceMapperDto mapperType) {
         return getServicePfsFactory().create(mapperType);
     }
 
-    protected ServiceMapperFactoryDto<IN, DOM> getServicePfsFactory() {
+    protected ServiceMapperFactoryDto<I, D> getServicePfsFactory() {
         return new ServiceMapperFactoryDtoImpl<>();
     }
 }

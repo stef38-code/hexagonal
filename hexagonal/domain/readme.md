@@ -47,13 +47,14 @@ package org.stephane.domain.business;
 
 import org.stephane.domain.entities.Personne;
 import org.stephane.domain.port.in.AjouterReponse;
-import org.stephane.domain.port.out.Ajouter;
+import org.stephane.domain.port.out.AjouterOut;
+import org.stephane.domain.port.out.AjouterOut;
 import org.stephane.domain.port.out.Enregistrer;
 
 public class UseCasePersonne {
 
-    public void ajouter(Personne personne, Ajouter ajouter, AjouterReponse reponse) {
-        Personne resultat = ajouter.execute(personne);
+    public void ajouterOut(Personne personne, AjouterOut ajouterOut, AjouterReponse reponse) {
+        Personne resultat = ajouterOut.execute(personne);
         reponse.donner(resultat);
     }
     //...etc
@@ -96,7 +97,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.stephane.domain.entities.Personne;
 import org.stephane.domain.port.in.AjouterReponse;
-import org.stephane.domain.port.out.Ajouter;
+import org.stephane.domain.port.out.AjouterOut;import org.stephane.domain.port.out.AjouterOut;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -106,21 +107,21 @@ class UseCasePersonneTest {
     MockAjouterReponse mockAddReponse = new MockAjouterReponse();
 
     @Test
-    void ajouter() {
+    void ajouterOut() {
         UseCasePersonne business = new UseCasePersonne();
         Personne personne = Personne.Builder.newInstance()
                 .nom("Solomon")
                 .prenom("Castro")
                 .dateNaissance(LocalDate.now().minusYears(30))
                 .build();
-        business.ajouter(personne, mockSavePersonne, mockAddReponse);
+        business.ajouterOut(personne, mockSavePersonne, mockAddReponse);
         Personne resultat = mockAddReponse.recuperer();
         Assertions.assertThat(resultat).isNotNull();
         Assertions.assertThat(resultat.getId()).isNotBlank();
     }
 
 
-    private class MockEnregistrerPersonne implements Ajouter {
+    private class MockEnregistrerPersonne implements AjouterOut {
 
         @Override
         public Personne execute(Personne personne) {
