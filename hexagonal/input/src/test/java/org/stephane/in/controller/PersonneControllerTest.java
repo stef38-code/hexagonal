@@ -59,7 +59,7 @@ class PersonneControllerTest {
     }
 
     @Test
-    void sansSpring() {
+    void enregistrer_Retourne_UnePersonne_Quand_Ajout_UnePersonne() {
         //Mock
         AjouterServicePersonne ajouterService = mock(AjouterServicePersonneImpl.class);
         //Instance du controler
