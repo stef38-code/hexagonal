@@ -25,6 +25,7 @@ public class JsonTools {
             throw new RuntimeException(e);
         }
     }
+
     /**
      * Map to string.
      *
@@ -36,7 +37,7 @@ public class JsonTools {
         ObjectMapper objMapper = new ObjectMapper();
         objMapper.registerModule(new JavaTimeModule());
         objMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-       StringWriter stringWriter = new StringWriter();
+        StringWriter stringWriter = new StringWriter();
         objMapper.writeValue(stringWriter, object);
 
         return stringWriter.toString();

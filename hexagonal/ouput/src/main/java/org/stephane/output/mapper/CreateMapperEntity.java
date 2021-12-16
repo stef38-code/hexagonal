@@ -6,6 +6,6 @@ public class CreateMapperEntity<O, D> {
     }
 
     protected ServiceMapperFactoryEntity<O, D> getServicePfsFactory() {
-        return new ServiceMapperFactoryEntityImpl<>();
+        return new ServiceMapperFactoryEntityImpl();
     }
 }

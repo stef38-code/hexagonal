@@ -1,5 +1,6 @@
 package org.stephane.domain.business;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.stephane.domain.business.personne.UseCaseModifierPersonneImpl;
 import org.stephane.domain.entities.PersonneBuilder;
@@ -12,8 +13,14 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class UseCaseModifierTest {
-    MockModifierPersonne mockRepository = new MockModifierPersonne();
-    MockModifierReponse mockReponse = new MockModifierReponse();
+    MockModifierPersonne mockRepository;
+    MockModifierReponse mockReponse;
+
+    @BeforeEach
+    void setUp() {
+        mockRepository = new MockModifierPersonne();
+        mockReponse = new MockModifierReponse();
+    }
 
     @Test
     void modifierUnePersonne() {
