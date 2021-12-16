@@ -8,6 +8,8 @@ import java.util.UUID;
 public class MockEnregistrerPersonne extends Enregistrer<Personne> {
     @Override
     public Personne execute(Personne personne) {
+
+
         return Personne.Builder.newInstance().clone(personne).id(UUID.randomUUID().toString()).build();
     }
 }
