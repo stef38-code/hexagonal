@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 import org.stephane.output.entities.PersonneEntity;
 
 @Repository
-@Qualifier("PersonneEntityRepository")
 public interface PersonneEntityRepository extends JpaRepository<PersonneEntity, String> {
 }

@@ -9,10 +9,10 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
-class PersonneTest {
+class PersonneBuilderTest {
     @Test
     void toStringValue() {
-        Personne personne = Personne.Builder.newInstance()
+        Personne personne = PersonneBuilder.aPersonne()
                 .id("1234567890")
                 .nom("Solomon")
                 .prenom("Castro")
@@ -23,7 +23,7 @@ class PersonneTest {
 
     @Test
     void validate_notException() {
-        Assertions.assertThatCode(() -> Personne.Builder.newInstance()
+        Assertions.assertThatCode(() -> PersonneBuilder.aPersonne()
                 .nom("Solomon")
                 .prenom("Castro")
                 .dateNaissance(LocalDate.now().minusYears(30))
@@ -32,7 +32,7 @@ class PersonneTest {
 
     @Test
     void validate_exception() {
-        Throwable assertionError = catchThrowable(() -> Personne.Builder.newInstance()
+        Throwable assertionError = catchThrowable(() -> PersonneBuilder.aPersonne()
                 .nom(null)
                 .prenom("")
                 .dateNaissance(LocalDate.now().minusYears(30))
@@ -49,7 +49,7 @@ class PersonneTest {
     @Test
     void validate_exception1() {
         Throwable assertionError = catchThrowable(() -> {
-            Personne.Builder.newInstance()
+            PersonneBuilder.aPersonne()
                     .nom("")
                     .prenom(null)
                     .dateNaissance(null)

@@ -36,9 +36,7 @@ public class JsonTools {
         ObjectMapper objMapper = new ObjectMapper();
         objMapper.registerModule(new JavaTimeModule());
         objMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-       /* objMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        objMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);*/
-        StringWriter stringWriter = new StringWriter();
+       StringWriter stringWriter = new StringWriter();
         objMapper.writeValue(stringWriter, object);
 
         return stringWriter.toString();

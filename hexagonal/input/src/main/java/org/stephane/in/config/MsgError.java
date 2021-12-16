@@ -13,7 +13,7 @@ public class MsgError {
     private Date timestamp;
     private String message;
     @Getter
-    private Map<String,String> descriptions = new HashMap<>();
+    private final Map<String,String> descriptions = new HashMap<>();
 
     @Builder
     private static MsgError of(int statusCode, Date timestamp, String message) {

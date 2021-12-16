@@ -1,7 +1,6 @@
 package org.stephane.in.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.stephane.in.dto.PersonneDto;
-import org.stephane.in.service.personne.AjouterService;
+import org.stephane.in.service.personne.AjouterServicePersonne;
 
 import javax.validation.Valid;
 
@@ -20,8 +19,7 @@ import javax.validation.Valid;
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_VALUE})
 @RequiredArgsConstructor
 public class PersonneController {
-    @Qualifier("AjouterServiceImpl")
-    private final AjouterService<PersonneDto> ajouterService;
+    private final AjouterServicePersonne ajouterService;
 
     @PostMapping
     public ResponseEntity<PersonneDto> enregistrer(@Valid @RequestBody PersonneDto personneDto) {

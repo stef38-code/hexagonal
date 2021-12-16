@@ -2,12 +2,12 @@ package org.stephane.domain.port.in;
 
 import java.util.Collection;
 
-public abstract class SelectionnerReponse<DOM> {
-    public abstract void donnee(DOM resultat); //resultat donné par la UseCase
+public abstract class SelectionnerReponse<D> {
+    public abstract void donnee(D resultat); //resultat donné par la UseCase
 
-    public abstract DOM recuperee();// récupé
+    public abstract D recuperee();// récupé
 
-    public abstract void donnees(Collection<DOM> resultat); //resultat donné par la UseCase
+    public abstract void donnees(Collection<D> resultat); //resultat donné par la UseCase
 
-    public abstract Collection<DOM> recuperees();// récupé
+    public abstract Collection<D> recuperees();// récupé
 }

@@ -1,31 +1,39 @@
 package org.stephane.domain.business;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.stephane.domain.business.personne.UseCaseAjouterPersonneImpl;
 import org.stephane.domain.entities.Personne;
+import org.stephane.domain.entities.PersonneBuilder;
 import org.stephane.domain.mock.in.personne.MockAjouterReponse;
-import org.stephane.domain.mock.in.personne.MockEnregistrerPersonne;
+import org.stephane.domain.mock.in.personne.MockAjouterPersonne;
 import org.stephane.domain.port.in.AjouterReponse;
-import org.stephane.domain.port.out.Enregistrer;
+import org.stephane.domain.port.out.Ajouter;
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class UseCaseAjouterTest {
-    Enregistrer<Personne> mockRepository = new MockEnregistrerPersonne();
-    AjouterReponse<Personne> mockReponse = new MockAjouterReponse();
+    Ajouter<Personne> mockRepository;
+    AjouterReponse<org.stephane.domain.entities.Personne> mockReponse;
+
+    @BeforeEach
+    void setUp() {
+        mockRepository = new MockAjouterPersonne();
+        mockReponse = new MockAjouterReponse();
+    }
 
     @Test
     void ajouter() {
-        UseCaseAjouter<Personne> business = new UseCaseAjouterPersonneImpl();
-        Personne personne = Personne.Builder.newInstance()
+        UseCaseAjouter<org.stephane.domain.entities.Personne> business = new UseCaseAjouterPersonneImpl();
+        org.stephane.domain.entities.Personne personne = PersonneBuilder.aPersonne()
                 .nom("Solomon")
                 .prenom("Castro")
                 .dateNaissance(LocalDate.now().minusYears(30))
                 .build();
         business.executer(personne, mockRepository, mockReponse);
-        Personne resultat = mockReponse.recuperer();
+        org.stephane.domain.entities.Personne resultat = mockReponse.recuperer();
 
 
         assertThat(resultat).isNotNull();

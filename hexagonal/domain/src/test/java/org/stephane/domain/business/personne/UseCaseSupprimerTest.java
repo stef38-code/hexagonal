@@ -2,7 +2,7 @@ package org.stephane.domain.business.personne;
 
 import org.junit.jupiter.api.Test;
 import org.stephane.domain.business.UseCaseSupprimer;
-import org.stephane.domain.entities.Personne;
+import org.stephane.domain.entities.PersonneBuilder;
 import org.stephane.domain.mock.in.personne.MockSupprimerPersonne;
 import org.stephane.domain.mock.in.personne.MockSupprimerReponse;
 
@@ -16,8 +16,8 @@ class UseCaseSupprimerTest {
     MockSupprimerReponse mockReponse = new MockSupprimerReponse();
     @Test
     void supprimerUnePersonne() {
-        UseCaseSupprimer<Personne> business = new UseCaseSupprimerPersonneImpl();
-        Personne personne = Personne.Builder.newInstance()
+        UseCaseSupprimer<org.stephane.domain.entities.Personne> business = new UseCaseSupprimerPersonneImpl();
+        org.stephane.domain.entities.Personne personne = PersonneBuilder.aPersonne()
                 .id(UUID.randomUUID().toString())
                 .nom("Solomon")
                 .prenom("Castro")

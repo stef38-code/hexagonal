@@ -11,7 +11,6 @@ import java.util.Set;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Builder
 @AllArgsConstructor
 @Entity
 @Table(name="adresse")

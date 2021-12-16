@@ -41,20 +41,22 @@ La méthode(exposée) sera souvent composée des paramètres suivants :
 Et retournera un __void__, sisi puisque le retour sera fait pas l'interface d'entrée `in`
 
 Exemple :
+
 ```java
 package org.stephane.domain.business;
 
 import org.stephane.domain.entities.Personne;
 import org.stephane.domain.port.in.AjouterReponse;
+import org.stephane.domain.port.out.Ajouter;
 import org.stephane.domain.port.out.Enregistrer;
 
 public class UseCasePersonne {
 
-  public void ajouter(Personne personne, Enregistrer enregistrer, AjouterReponse reponse) {
-    Personne resultat = enregistrer.execute(personne);
-    reponse.donner(resultat);
-  }
-  //...etc
+    public void ajouter(Personne personne, Ajouter ajouter, AjouterReponse reponse) {
+        Personne resultat = ajouter.execute(personne);
+        reponse.donner(resultat);
+    }
+    //...etc
 }
 ```
 
@@ -86,6 +88,7 @@ public interface AjouterReponse {
 
 # Faire un Test unitaire
 Les tests unitaires seront plus simple à réaliser grâce aux interfaces __d'entrée__ et __sortie__
+
 ```java
 package org.stephane.domain.business;
 
@@ -93,7 +96,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.stephane.domain.entities.Personne;
 import org.stephane.domain.port.in.AjouterReponse;
-import org.stephane.domain.port.out.Enregistrer;
+import org.stephane.domain.port.out.Ajouter;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -107,25 +110,27 @@ class UseCasePersonneTest {
         UseCasePersonne business = new UseCasePersonne();
         Personne personne = Personne.Builder.newInstance()
                 .nom("Solomon")
-                .prenom( "Castro")
+                .prenom("Castro")
                 .dateNaissance(LocalDate.now().minusYears(30))
                 .build();
-        business.ajouter(personne,mockSavePersonne,mockAddReponse);
+        business.ajouter(personne, mockSavePersonne, mockAddReponse);
         Personne resultat = mockAddReponse.recuperer();
         Assertions.assertThat(resultat).isNotNull();
         Assertions.assertThat(resultat.getId()).isNotBlank();
     }
 
 
-    private class MockEnregistrerPersonne implements Enregistrer {
+    private class MockEnregistrerPersonne implements Ajouter {
 
         @Override
         public Personne execute(Personne personne) {
             return Personne.Builder.newInstance().clone(personne).id(UUID.randomUUID().toString()).build();
         }
     }
+
     private class MockAjouterReponse implements AjouterReponse {
         private Personne resultat;
+
         @Override
         public void donner(Personne resultat) {
             this.resultat = resultat;

@@ -16,7 +16,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.stephane.in.dto.PersonneDto;
-import org.stephane.in.service.personne.AjouterService;
+import org.stephane.in.service.personne.AjouterServicePersonne;
+import org.stephane.in.service.personne.AjouterServicePersonneImpl;
 import tools.FileTools;
 import tools.JsonTools;
 
@@ -28,7 +29,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(SpringExtension.class)
 class PersonneControllerTest {
     @MockBean
-    private AjouterService ajouterService;
+    private AjouterServicePersonne ajouterService;
 
     @Autowired
     private PersonneController personneController;
@@ -60,7 +61,7 @@ class PersonneControllerTest {
     @Test
     void sansSpring() {
         //Mock
-        AjouterService<PersonneDto> ajouterService = mock(AjouterService.class);
+        AjouterServicePersonne ajouterService = mock(AjouterServicePersonneImpl.class);
         //Instance du controler
         PersonneController controller = new PersonneController(ajouterService);
         //obj retouné par le mock

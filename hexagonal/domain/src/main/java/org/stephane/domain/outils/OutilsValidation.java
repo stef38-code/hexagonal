@@ -4,8 +4,10 @@ import java.util.Map;
 
 public class OutilsValidation {
 
-    protected OutilsValidation() {
-    }
+// --Commented out by Inspection START (16/12/2021 14:06):
+//    protected OutilsValidation() {
+//    }
+// --Commented out by Inspection STOP (16/12/2021 14:06)
     public static void notNullNotEmpty(String champ, String value, Map<String,String> erreurs) {
         if (isNull(value)) {
             erreurs.put(champ,"Le ".concat(champ).concat(" est obligatoire !!"));
