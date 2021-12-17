@@ -9,6 +9,7 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -25,4 +26,6 @@ public class PersonneDto {
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate dateNaissance;
+
+    private Set<AdresseDto> adresses;
 }

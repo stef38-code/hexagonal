@@ -1,27 +1,26 @@
-package org.stephane.output.entities;
+package org.stephane.in.dto;
 
 import org.stephane.domain.entities.builder.Builder;
-import org.stephane.domain.entities.builder.ErreursValidations;
 
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-public class PersonneEntityBuilder extends ErreursValidations implements Builder<PersonneEntity> {
+public class PersonneDtoBuilder implements Builder<PersonneDto> {
     private String id;
     private String nom;
     private String prenom;
     private LocalDate dateNaissance;
-    private Set<AdresseEntity> adresses = new HashSet<>();
+    private Set<AdresseDto> adresses = new HashSet<>();
 
-    private PersonneEntityBuilder() {
+    private PersonneDtoBuilder() {
     }
 
-    public static PersonneEntityBuilder builder() {
-        return new PersonneEntityBuilder();
+    public static PersonneDtoBuilder builder() {
+        return new PersonneDtoBuilder();
     }
 
-    public PersonneEntityBuilder clone(PersonneEntity personne) {
+    public PersonneDtoBuilder clone(PersonneDto personne) {
         this.id = personne.getId();
         this.nom = personne.getNom();
         this.prenom = personne.getPrenom();
@@ -30,8 +29,8 @@ public class PersonneEntityBuilder extends ErreursValidations implements Builder
         return this;
     }
 
-    public PersonneEntity build() {
-        PersonneEntity personne = new PersonneEntity();
+    public PersonneDto build() {
+        PersonneDto personne = new PersonneDto();
         personne.setId(this.id);
         personne.setNom(this.nom);
         personne.setPrenom(this.prenom);
@@ -40,29 +39,30 @@ public class PersonneEntityBuilder extends ErreursValidations implements Builder
         return personne;
     }
 
-    public PersonneEntityBuilder id(String id) {
+    public PersonneDtoBuilder id(String id) {
         this.id = id;
         return this;
     }
 
-    public PersonneEntityBuilder nom(String nom) {
+    public PersonneDtoBuilder nom(String nom) {
         this.nom = nom;
         return this;
     }
 
-    public PersonneEntityBuilder prenom(String prenom) {
+    public PersonneDtoBuilder prenom(String prenom) {
         this.prenom = prenom;
         return this;
     }
 
-    public PersonneEntityBuilder dateNaissance(LocalDate dateNaissance) {
+    public PersonneDtoBuilder dateNaissance(LocalDate dateNaissance) {
         this.dateNaissance = dateNaissance;
         return this;
     }
 
-    public PersonneEntityBuilder adresses(Set<AdresseEntity> adresses) {
+    public PersonneDtoBuilder adresses(Set<AdresseDto> adresses) {
         this.adresses = adresses;
         return this;
     }
+
 
 }

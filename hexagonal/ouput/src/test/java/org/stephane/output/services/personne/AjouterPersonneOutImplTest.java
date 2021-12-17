@@ -40,7 +40,7 @@ class AjouterPersonneOutImplTest {
                 .dateNaissance(LocalDate.of(1942, 6, 19))
                 .build();
         String id = UUID.randomUUID().toString();
-        PersonneEntity personneMock = PersonneEntityBuilder.aPersonne()
+        PersonneEntity personneMock = PersonneEntityBuilder.builder()
                 .id(id)
                 .nom("Dufresne")
                 .prenom("Eleanor")
