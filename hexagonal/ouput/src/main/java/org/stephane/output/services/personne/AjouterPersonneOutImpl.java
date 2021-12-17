@@ -6,7 +6,7 @@ import org.stephane.domain.entities.Personne;
 import org.stephane.domain.port.out.personne.AjouterPersonneOut;
 import org.stephane.output.entities.PersonneEntity;
 import org.stephane.output.mapper.factory.CreateMapperEntity;
-import org.stephane.output.mapper.TypeServiceMapperEntity;
+import org.stephane.output.mapper.factory.TypeServiceMapperEntity;
 import org.stephane.output.repository.PersonneEntityRepository;
 
 @RequiredArgsConstructor
