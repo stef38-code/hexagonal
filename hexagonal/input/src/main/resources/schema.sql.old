@@ -1,0 +1,22 @@
+
+CREATE TABLE personne
+(
+    id             VARCHAR(255) NOT NULL,
+    nom            VARCHAR(255),
+    prenom         VARCHAR(255),
+    datenaissance date,
+    CONSTRAINT pk_personne PRIMARY KEY (id)
+);
+CREATE TABLE adresse
+(
+    id                         VARCHAR(255) NOT NULL,
+    appartement_escalier_etage VARCHAR(255),
+    batiment_residence         VARCHAR(255),
+    numero_nom_voie            VARCHAR(255),
+    complement_adresse         VARCHAR(255),
+    code_postal                VARCHAR(255),
+    ville                      VARCHAR(255),
+    pays                       VARCHAR(255),
+    CONSTRAINT pk_adresse PRIMARY KEY (id)
+);
+commit;

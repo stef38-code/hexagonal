@@ -28,6 +28,7 @@ public class PersonneEntity {
     @NotEmpty
     private String prenom;
     @NotNull
+    @Column(name ="datenaissance")
     private LocalDate dateNaissance;
     @ManyToMany(mappedBy = "personnes",cascade = {
             CascadeType.PERSIST,
