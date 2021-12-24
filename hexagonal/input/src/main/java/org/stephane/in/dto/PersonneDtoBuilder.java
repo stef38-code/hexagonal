@@ -1,6 +1,6 @@
 package org.stephane.in.dto;
 
-import org.stephane.domain.entities.builder.Builder;
+import org.stephane.in.dto.builder.Builder;
 
 import java.time.LocalDate;
 import java.util.HashSet;

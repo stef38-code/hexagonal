@@ -28,4 +28,16 @@ public class PersonneDto {
     private LocalDate dateNaissance;
 
     private Set<AdresseDto> adresses;
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("PersonneDto{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", nom='").append(nom).append('\'');
+        sb.append(", prenom='").append(prenom).append('\'');
+        sb.append(", dateNaissance=").append(dateNaissance);
+        sb.append(", adresses=").append(adresses);
+        sb.append('}');
+        return sb.toString();
+    }
 }
