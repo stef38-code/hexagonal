@@ -4,34 +4,31 @@ import lombok.extern.slf4j.Slf4j;
 import org.stephane.in.dto.AdresseDto;
 import org.stephane.in.dto.AdresseDtoBuilder;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Slf4j
-public class GenererAdresse extends ReadFile {
-    private Random rand;
-    private String fileRue = "src/main/resources/rue.txt";
-    private String fileDepartement = "src/main/resources/departement.txt";
-    private List<String> rues;
-    private List<String> codesPostalEtVilles;
+public class GenererAdresse extends ReadFile implements GenererDonnees<AdresseDto>{
+    private static  final String FILE_RUE = "src/main/resources/rue.txt";
+    private static final String FILE_DEPARTEMENT = "src/main/resources/departement.txt";
+    private final List<String> rues;
+    private final List<String> codesPostalEtVilles;
 
     public GenererAdresse() {
-        rues = read(fileRue);
-        codesPostalEtVilles = read(fileDepartement);
-        rand = getSecureRandom();
+        super();
+        rues = read(FILE_RUE);
+        codesPostalEtVilles = read(FILE_DEPARTEMENT);
     }
-
-    public List<AdresseDto> genereListAdresseDto(int nombre) {
+@Override
+    public List<AdresseDto> genererListe(int nombre) {
         List<AdresseDto> liste = new ArrayList<>();
         for (int i = 0; i < nombre; i++) {
-            liste.add(genereAdresseDto());
+            liste.add(generer());
         }
         return liste;
     }
 
-    public AdresseDto genereAdresseDto() {
+    public AdresseDto generer() {
         String rue = getRue(rues);
         String codePerstalEtDepartement = getCodesPostalEtVilles(codesPostalEtVilles);
         String[] split = codePerstalEtDepartement.split(";");
@@ -45,11 +42,11 @@ public class GenererAdresse extends ReadFile {
     }
 
     private String getRue(List<String> rues) {
-        return rues.get(rand.nextInt(rues.size()));
+        return rues.get(getRand().nextInt(rues.size()));
     }
 
     private String getCodesPostalEtVilles(List<String> codePerstalEtDepartement) {
-        return codePerstalEtDepartement.get(rand.nextInt(codePerstalEtDepartement.size()));
+        return codePerstalEtDepartement.get(getRand().nextInt(codePerstalEtDepartement.size()));
     }
 
 

@@ -22,12 +22,12 @@ class GenererPersonneTest {
 
     @Test
     void testGenereListPersonneDto() {
-        assertThat(genererPersonne.genereListPersonneDto(10, startDate, endDate)).hasSize(10);
+        assertThat(genererPersonne.genererListe(10, startDate, endDate)).hasSize(10);
     }
 
     @Test
     void testGenerePersonneDto() {
-        PersonneDto actual = genererPersonne.generePersonneDto(startDate, endDate);
+        PersonneDto actual = genererPersonne.generer(startDate, endDate);
         assertThat(actual.getAdresses()).isEmpty();
         assertThat(actual.getId()).isNull();
     }

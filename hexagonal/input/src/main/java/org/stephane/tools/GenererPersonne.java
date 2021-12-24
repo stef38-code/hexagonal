@@ -4,42 +4,33 @@ import lombok.extern.slf4j.Slf4j;
 import org.stephane.in.dto.PersonneDto;
 import org.stephane.in.dto.PersonneDtoBuilder;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 @Slf4j
-public class GenererPersonne extends ReadFile{
-    private Random rand;
-    private String fileAnimaux = "src/main/resources/animaux.txt";
-    private String fileAdjectif = "src/main/resources/adjectif.txt";
-    private List<String> animaux;
-    private List<String> adjectifs;
+public class GenererPersonne extends ReadFile implements GenererDonnees<PersonneDto>{
+
+    private static final String FILE_ANIMAUX = "src/main/resources/animaux.txt";
+    private static final String FILE_ADJECTIF = "src/main/resources/adjectif.txt";
+    private final List<String> animaux;
+    private final List<String> adjectifs;
 
     public GenererPersonne() {
-        rand = getSecureRandom();
-        animaux = read(fileAnimaux);
-        adjectifs = read(fileAdjectif);
+        super();
+        animaux = read(FILE_ANIMAUX);
+        adjectifs = read(FILE_ADJECTIF);
     }
 
-    public List<PersonneDto> genereListPersonneDto(int nombre, LocalDate startDate, LocalDate endDate) {
+    public List<PersonneDto> genererListe(int nombre, LocalDate startDate, LocalDate endDate) {
         List<PersonneDto> liste = new ArrayList<>();
         for (int i = 0; i < nombre; i++) {
-            liste.add(generePersonneDto(startDate, endDate));
+            liste.add(generer(startDate, endDate));
         }
         return liste;
     }
 
-    public PersonneDto generePersonneDto(LocalDate startDate, LocalDate endDate) {
+    public PersonneDto generer(LocalDate startDate, LocalDate endDate) {
         String animal = getAnimal(animaux);
         String adjectif = getAdlectif(adjectifs);
         LocalDate dateNaissance = randomLocalDate(startDate, endDate);
@@ -56,19 +47,20 @@ public class GenererPersonne extends ReadFile{
     }
 
     private String getAnimal(List<String> animaux) {
-        return animaux.get(rand.nextInt(animaux.size()));
+        return animaux.get(getRand().nextInt(animaux.size()));
     }
 
     private String getAdlectif(List<String> adjectifs) {
-        return adjectifs.get(rand.nextInt(adjectifs.size()));
+        return adjectifs.get(getRand().nextInt(adjectifs.size()));
     }
 
+    @Override
+    public List<PersonneDto> genererListe(int nombre) {
+        return genererListe(nombre,LocalDate.of(1945, 1, 1), LocalDate.of(2000, 12, 31));
+    }
 
-    private LocalDate randomLocalDate(LocalDate startDate, LocalDate endDate) {
-
-        long start = startDate.toEpochDay();
-        long end = endDate.toEpochDay();
-        long randomEpochDay = ThreadLocalRandom.current().longs(start, end).findAny().getAsLong();
-        return Instant.ofEpochMilli(randomEpochDay).atZone(ZoneId.systemDefault()).toLocalDate();
+    @Override
+    public PersonneDto generer() {
+        return generer(LocalDate.of(1945, 1, 1), LocalDate.of(2000, 12, 31));
     }
 }

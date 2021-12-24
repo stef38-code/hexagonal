@@ -1,7 +1,5 @@
 package org.stephane.tools;
 
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.stephane.in.dto.AdresseDto;
@@ -19,12 +17,12 @@ class GenererAdresseTest {
 
     @Test
     void testGenereListAdresseDto() {
-        assertThat(genererAdresse.genereListAdresseDto(10)).hasSize(10);
+        assertThat(genererAdresse.genererListe(10)).hasSize(10);
     }
 
     @Test
     void testGenereAdresseDto() {
-        AdresseDto actualGenereAdresseDtoResult = genererAdresse.genereAdresseDto();
+        AdresseDto actualGenereAdresseDtoResult = genererAdresse.generer();
         assertThat(actualGenereAdresseDtoResult.getAppartementEscalierEtage()).isNull();
         assertThat(actualGenereAdresseDtoResult.getPersonnes()).isEmpty();
         assertThat(actualGenereAdresseDtoResult.getPays()).isNull();
