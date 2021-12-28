@@ -2,6 +2,8 @@ package org.stephane.output.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -10,7 +12,6 @@ import java.util.Set;
 
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = {"personnes"})
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -33,5 +34,6 @@ public class AdresseEntity {
             CascadeType.MERGE
     })
     @JsonManagedReference
+    @Fetch(FetchMode.SUBSELECT)
     private Set<PersonneEntity> personnes = new HashSet<>();
 }
