@@ -1,6 +1,12 @@
 package org.stephane.output.entities;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -12,12 +18,10 @@ import java.util.Set;
 
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
-@Builder
 @AllArgsConstructor
 @Entity
-@Table(name="personne")
+@Table(name = "personne")
 public class PersonneEntity {
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -28,11 +32,16 @@ public class PersonneEntity {
     @NotEmpty
     private String prenom;
     @NotNull
-    @Column(name ="datenaissance")
+    @Column(name = "datenaissance")
     private LocalDate dateNaissance;
-    @ManyToMany(mappedBy = "personnes",cascade = {
+
+    @ManyToMany(targetEntity = AdresseEntity.class, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
+    @JsonBackReference
+    @JoinTable(name = "personne_adresse", joinColumns = {@JoinColumn(name = "PERSONNE_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ADRESSE_ID", nullable = false)})
+    @Fetch(FetchMode.SELECT)
     private Set<AdresseEntity> adresses = new HashSet<>();
 }

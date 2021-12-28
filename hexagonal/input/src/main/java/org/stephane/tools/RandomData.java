@@ -36,6 +36,6 @@ public class RandomData {
         long start = startDate.toEpochDay();
         long end = endDate.toEpochDay();
         long randomEpochDay = ThreadLocalRandom.current().nextLong(start, end);
-        return Instant.ofEpochMilli(randomEpochDay).atZone(ZoneId.systemDefault()).toLocalDate();
+        return LocalDate.ofEpochDay(randomEpochDay);
     }
 }

@@ -11,8 +11,8 @@ import java.util.List;
 @Slf4j
 public class GenererPersonne extends ReadFile implements GenererDonnees<PersonneDto>{
 
-    private static final String FILE_ANIMAUX = "src/main/resources/animaux.txt";
-    private static final String FILE_ADJECTIF = "src/main/resources/adjectif.txt";
+    private static final String FILE_ANIMAUX = "/animaux.txt";
+    private static final String FILE_ADJECTIF = "/adjectif.txt";
     private final List<String> animaux;
     private final List<String> adjectifs;
 

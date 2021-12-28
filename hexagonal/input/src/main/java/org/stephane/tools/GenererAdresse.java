@@ -9,8 +9,8 @@ import java.util.List;
 
 @Slf4j
 public class GenererAdresse extends ReadFile implements GenererDonnees<AdresseDto>{
-    private static  final String FILE_RUE = "src/main/resources/rue.txt";
-    private static final String FILE_DEPARTEMENT = "src/main/resources/departement.txt";
+    private static  final String FILE_RUE = "/rue.txt";
+    private static final String FILE_DEPARTEMENT = "/departement.txt";
     private final List<String> rues;
     private final List<String> codesPostalEtVilles;
 

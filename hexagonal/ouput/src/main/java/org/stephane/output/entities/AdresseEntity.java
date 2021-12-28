@@ -1,15 +1,16 @@
 package org.stephane.output.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
-@ToString
+@EqualsAndHashCode(exclude = {"personnes"})
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -27,16 +28,10 @@ public class AdresseEntity {
     private String ville;
     private String pays;
 
-    @ManyToMany(
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            }
-    )
-    @JoinTable(name = "personne_adresse",
-            joinColumns = @JoinColumn(name = "personne_id"),
-            inverseJoinColumns = @JoinColumn(name = "adresse_id")
-    )
-
-    private Set<PersonneEntity> personnes = new LinkedHashSet<>();
+    @ManyToMany(targetEntity = PersonneEntity.class, mappedBy = "adresses",cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JsonManagedReference
+    private Set<PersonneEntity> personnes = new HashSet<>();
 }

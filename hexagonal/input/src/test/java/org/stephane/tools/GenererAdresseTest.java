@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.stephane.in.dto.AdresseDto;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class GenererAdresseTest {
@@ -17,12 +19,18 @@ class GenererAdresseTest {
 
     @Test
     void testGenereListAdresseDto() {
-        assertThat(genererAdresse.genererListe(10)).hasSize(10);
+        List<AdresseDto> list = genererAdresse.genererListe(10);
+        assertThat(list).hasSize(10);
+        list.forEach( element -> asserThat(element));
     }
 
     @Test
     void testGenereAdresseDto() {
         AdresseDto actualGenereAdresseDtoResult = genererAdresse.generer();
+        asserThat(actualGenereAdresseDtoResult);
+    }
+
+    private void asserThat(AdresseDto actualGenereAdresseDtoResult) {
         assertThat(actualGenereAdresseDtoResult.getAppartementEscalierEtage()).isNull();
         assertThat(actualGenereAdresseDtoResult.getPersonnes()).isEmpty();
         assertThat(actualGenereAdresseDtoResult.getPays()).isNull();
