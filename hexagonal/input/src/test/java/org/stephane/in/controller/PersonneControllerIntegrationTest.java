@@ -10,8 +10,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.stephane.in.dto.PersonneDto;
-import tools.FileTools;
-import tools.JsonTools;
+import org.stephane.tools.FileTools;
+import org.stephane.tools.JsonMapper;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,8 +24,9 @@ class PersonneControllerIntegrationTest {
 
     @Test
     void enregistrer_Retourne_UnePersonne_Quand_Ajout_UnePersonne() throws Exception {
-        String content = FileTools.getResourceFileAsString("personne.json");
-        assert content != null;
+        Optional<String> value = FileTools.getResourceFileAsString("personne.json");
+        assertThat(value).isPresent();
+        String content = value.get();
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/personnes")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content);
@@ -33,14 +36,18 @@ class PersonneControllerIntegrationTest {
         actualPerformResult.andExpect(MockMvcResultMatchers.status().is(200));
         String contentAsString = actualPerformResult.andReturn().getResponse().getContentAsString();
         assertThat(contentAsString).isNotBlank();
-        PersonneDto personneDto = JsonTools.parseJsonStringToObject(contentAsString, PersonneDto.class);
+        Optional<PersonneDto> resultat = JsonMapper.toObject(contentAsString, PersonneDto.class);
+        assertThat(resultat).isPresent();
+        PersonneDto personneDto = resultat.get();
         assertThat(personneDto.getId()).isNotEmpty();
     }
 
     @Test
     void enregistrer_Retourne_400_Quand_Ajout_UnePersonneNonValide() throws Exception {
-        String content = FileTools.getResourceFileAsString("personne_error.json");
-        assert content != null;
+        Optional<String> value = FileTools.getResourceFileAsString("personne_error.json");
+        assertThat(value).isPresent();
+        String content = value.get();
+
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/personnes")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content);

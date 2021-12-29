@@ -10,10 +10,11 @@ import org.stephane.in.service.personne.AjouterServicePersonne;
 import org.stephane.in.service.personne.AjouterServicePersonneImpl;
 import org.stephane.in.service.personne.SelectionnerServicePersonne;
 import org.stephane.in.service.personne.SelectionnerServicePersonneImpl;
-import tools.JsonTools;
+import org.stephane.tools.JsonMapper;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -38,23 +39,28 @@ class PersonneControllerTest {
 
     @Test
     void enregistrer_Retourne_UnePersonne_Quand_Ajout_UnePersonne() {
-        personneDto = JsonTools.readObjectToJsonFile(personneDto,"personne.json");
+        Optional<PersonneDto> fileContent = JsonMapper.fileToObject(PersonneDto.class, "personne.json");
+        assertThat(fileContent).isPresent();
+        personneDto = fileContent.get();
         //
-        given(ajouterService.executer(ArgumentMatchers.<PersonneDto>any())).willReturn(personneDto);
+        given(ajouterService.executer(ArgumentMatchers.<PersonneDto>any())).willReturn(this.personneDto);
         //
-        ResponseEntity<PersonneDto> responseEntity = controller.enregistrer(personneDto);
+        ResponseEntity<PersonneDto> responseEntity = controller.enregistrer(this.personneDto);
         //controle
         assertThat(responseEntity).isNotNull();
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         PersonneDto body = responseEntity.getBody();
         assertThat(body).isNotNull();
         //compare les obj
-        assertThat(body).usingRecursiveComparison().isEqualTo(personneDto);
+        assertThat(body).usingRecursiveComparison().isEqualTo(this.personneDto);
 
     }
+
     @Test
-    void lister_Retourne_laListeDesPersonnes(){
-        listPersonneDto = JsonTools.jsonArrayToObjectList("personnes.json",PersonneDto.class);
+    void lister_Retourne_laListeDesPersonnes() {
+        Optional<List<PersonneDto>> fileContent = JsonMapper.fileToListObject(PersonneDto.class, "personnes.json");
+        assertThat(fileContent).isPresent();
+        listPersonneDto = fileContent.get();
         //
         given(selectionnerService.executer()).willReturn(listPersonneDto);
         //
