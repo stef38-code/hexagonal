@@ -12,6 +12,9 @@ import org.stephane.in.service.personne.SelectionnerServicePersonne;
 import org.stephane.in.service.personne.SelectionnerServicePersonneImpl;
 import tools.JsonTools;
 
+import java.util.Collection;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -20,6 +23,7 @@ import static org.mockito.Mockito.mock;
 class PersonneControllerTest {
     //obj retouné par le mock
     PersonneDto personneDto;
+    List<PersonneDto> listPersonneDto;
     private SelectionnerServicePersonne selectionnerService;
     private AjouterServicePersonne ajouterService;
     private PersonneController controller;
@@ -34,7 +38,7 @@ class PersonneControllerTest {
 
     @Test
     void enregistrer_Retourne_UnePersonne_Quand_Ajout_UnePersonne() {
-        personneDto = JsonTools.readObjectToJsonFile(personneDto, "personne.json");
+        personneDto = JsonTools.readObjectToJsonFile(personneDto,"personne.json");
         //
         given(ajouterService.executer(ArgumentMatchers.<PersonneDto>any())).willReturn(personneDto);
         //
@@ -47,6 +51,19 @@ class PersonneControllerTest {
         //compare les obj
         assertThat(body).usingRecursiveComparison().isEqualTo(personneDto);
 
+    }
+    @Test
+    void lister_Retourne_laListeDesPersonnes(){
+        listPersonneDto = JsonTools.jsonArrayToObjectList("personnes.json",PersonneDto.class);
+        //
+        given(selectionnerService.executer()).willReturn(listPersonneDto);
+        //
+        ResponseEntity<Collection<PersonneDto>> responseEntity = controller.lister();
+        //controle
+        assertThat(responseEntity).isNotNull();
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        Collection<PersonneDto> body = responseEntity.getBody();
+        assertThat(body).isNotNull().isNotEmpty().hasSize(10);
     }
 }
 

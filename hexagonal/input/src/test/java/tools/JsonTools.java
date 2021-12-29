@@ -6,12 +6,18 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.ResourceUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,6 +42,7 @@ public class JsonTools {
     public static String parseObjectAsJsonString(Object object) throws IOException {
         ObjectMapper objMapper = new ObjectMapper();
         objMapper.registerModule(new JavaTimeModule());
+        objMapper.registerModule(new Jdk8Module());
         objMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         StringWriter stringWriter = new StringWriter();
         objMapper.writeValue(stringWriter, object);
@@ -121,8 +128,12 @@ public class JsonTools {
      */
     private static <T> File getFileRessource(String nomFichierObject) {
         log.info("fichier de ressources:" + nomFichierObject);
-        File file = new File(Objects.requireNonNull(JsonTools.class.getClassLoader().getResource(nomFichierObject)).getFile());
-        return file;
+        try {
+            return ResourceUtils.getFile("classpath:" + nomFichierObject);
+        } catch (FileNotFoundException e) {
+            log.error("Fichier {} introuvable !!",nomFichierObject,e);
+            return null;
+        }
     }
 
     /**
@@ -158,5 +169,20 @@ public class JsonTools {
             throws JsonProcessingException, JsonMappingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(jsonResponse, valueType);
+    }
+
+    public static <T> List<T> jsonArrayToObjectList(String jsonFileName, Class<T> tClass)  {
+        ObjectMapper mapper = new ObjectMapper();
+        final File file = getFileRessource(jsonFileName);
+        CollectionType listType = mapper.getTypeFactory()
+                .constructCollectionType(ArrayList.class, tClass);
+        List<T> ts = null;
+        try {
+            ts = mapper.readValue(file, listType);
+        } catch (IOException e) {
+           log.error("Erreur lecture du fichier: {}",jsonFileName,e);
+           return Collections.EMPTY_LIST;
+        }
+        return ts;
     }
 }
