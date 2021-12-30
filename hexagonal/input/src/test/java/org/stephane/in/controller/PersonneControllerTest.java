@@ -14,9 +14,11 @@ import org.stephane.tools.JsonMapper;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -71,5 +73,9 @@ class PersonneControllerTest {
         Collection<PersonneDto> body = responseEntity.getBody();
         assertThat(body).isNotNull().isNotEmpty().hasSize(10);
     }
+
+
+
+
 }
 

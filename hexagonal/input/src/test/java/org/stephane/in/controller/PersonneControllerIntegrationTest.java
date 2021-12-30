@@ -1,5 +1,6 @@
 package org.stephane.in.controller;
 
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +14,7 @@ import org.stephane.in.dto.PersonneDto;
 import org.stephane.tools.FileTools;
 import org.stephane.tools.JsonMapper;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,8 +25,10 @@ class PersonneControllerIntegrationTest {
     private PersonneController personneController;
 
     @Test
+    @Order(1)
     void enregistrer_Retourne_UnePersonne_Quand_Ajout_UnePersonne() throws Exception {
         Optional<String> value = FileTools.getResourceFileAsString("personne.json");
+
         assertThat(value).isPresent();
         String content = value.get();
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/personnes")
@@ -43,6 +47,7 @@ class PersonneControllerIntegrationTest {
     }
 
     @Test
+    @Order(2)
     void enregistrer_Retourne_400_Quand_Ajout_UnePersonneNonValide() throws Exception {
         Optional<String> value = FileTools.getResourceFileAsString("personne_error.json");
         assertThat(value).isPresent();

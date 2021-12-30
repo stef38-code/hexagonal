@@ -11,7 +11,7 @@ import org.stephane.in.dto.PersonneDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class JsonMapperTest {
-    private GenererPersonne genererPersonne = new GenererPersonne();
+    private final GenererPersonne genererPersonne = new GenererPersonne();
     private LocalDate startDate ;
     private LocalDate endDate ;
     private PersonneDto personneDto;
@@ -69,7 +69,7 @@ class JsonMapperTest {
         assertThat(resultat).isPresent();
         List<PersonneDto> dtoList = resultat.get();
         assertThat(dtoList).isNotEmpty().hasSize(2);
-        dtoList.forEach(personn -> assertThatPersonneDto(personn));
+        dtoList.forEach(this::assertThatPersonneDto);
     }
 
     private void assertThatPersonneDto(PersonneDto personneDtoR) {
