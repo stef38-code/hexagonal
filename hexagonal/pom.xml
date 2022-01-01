@@ -8,10 +8,20 @@
     <artifactId>hexagonal</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
+    <distributionManagement>
+        <site>
+            <id>local</id>
+            <url>http://localhost</url>
+            <name>Localhost</name>
+        </site>
+    </distributionManagement>
+
     <modules>
         <module>input</module>
         <module>ouput</module>
         <module>domain</module>
+        <module>code-coverage</module>
     </modules>
 
     <properties>
@@ -24,6 +34,7 @@
         <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
         <sonar.language>java</sonar.language>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <jacoco.plugin.version>0.8.7</jacoco.plugin.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -49,7 +60,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
+                <version>${jacoco.plugin.version}</version>
                 <configuration>
                     <dataFile>${sonar.jacoco.reportPath}</dataFile>
                     <destFile>${sonar.jacoco.reportPath}</destFile>
@@ -76,7 +87,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
             </plugin>
-
         </plugins>
     </build>
 </project>

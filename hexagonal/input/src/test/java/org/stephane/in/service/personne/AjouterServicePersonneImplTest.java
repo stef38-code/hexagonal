@@ -1,6 +1,5 @@
 package org.stephane.in.service.personne;
 
-import org.assertj.core.api.BDDAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -17,8 +16,7 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.BDDAssertions.*;
+import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 

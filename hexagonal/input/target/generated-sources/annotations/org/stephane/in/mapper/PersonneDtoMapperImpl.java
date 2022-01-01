@@ -12,7 +12,7 @@ import org.stephane.in.dto.PersonneDto;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-12-20T13:23:31+0100",
+    date = "2022-01-01T21:24:53+0100",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.8 (Azul Systems, Inc.)"
 )
 public class PersonneDtoMapperImpl extends PersonneDtoMapper {
@@ -79,6 +79,19 @@ public class PersonneDtoMapperImpl extends PersonneDtoMapper {
         return personne;
     }
 
+    protected Set<PersonneDto> personneSetToPersonneDtoSet(Set<Personne> set) {
+        if ( set == null ) {
+            return null;
+        }
+
+        Set<PersonneDto> set1 = new HashSet<PersonneDto>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
+        for ( Personne personne : set ) {
+            set1.add( toInput( personne ) );
+        }
+
+        return set1;
+    }
+
     protected AdresseDto adresseToAdresseDto(Adresse adresse) {
         if ( adresse == null ) {
             return null;
@@ -94,10 +107,7 @@ public class PersonneDtoMapperImpl extends PersonneDtoMapper {
         adresseDto.setCodePostal( adresse.getCodePostal() );
         adresseDto.setVille( adresse.getVille() );
         adresseDto.setPays( adresse.getPays() );
-        Set<Personne> set = adresse.getPersonnes();
-        if ( set != null ) {
-            adresseDto.setPersonnes( new HashSet<Personne>( set ) );
-        }
+        adresseDto.setPersonnes( personneSetToPersonneDtoSet( adresse.getPersonnes() ) );
 
         return adresseDto;
     }
@@ -110,6 +120,19 @@ public class PersonneDtoMapperImpl extends PersonneDtoMapper {
         Set<AdresseDto> set1 = new HashSet<AdresseDto>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
         for ( Adresse adresse : set ) {
             set1.add( adresseToAdresseDto( adresse ) );
+        }
+
+        return set1;
+    }
+
+    protected Set<Personne> personneDtoSetToPersonneSet(Set<PersonneDto> set) {
+        if ( set == null ) {
+            return null;
+        }
+
+        Set<Personne> set1 = new HashSet<Personne>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
+        for ( PersonneDto personneDto : set ) {
+            set1.add( toDomain( personneDto ) );
         }
 
         return set1;
@@ -130,10 +153,7 @@ public class PersonneDtoMapperImpl extends PersonneDtoMapper {
         adresse.setCodePostal( adresseDto.getCodePostal() );
         adresse.setVille( adresseDto.getVille() );
         adresse.setPays( adresseDto.getPays() );
-        Set<Personne> set = adresseDto.getPersonnes();
-        if ( set != null ) {
-            adresse.setPersonnes( new HashSet<Personne>( set ) );
-        }
+        adresse.setPersonnes( personneDtoSetToPersonneSet( adresseDto.getPersonnes() ) );
 
         return adresse;
     }

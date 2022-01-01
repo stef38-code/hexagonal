@@ -1,6 +1,11 @@
 /hexagonal/.idea/
 /hexagonal/.jpb/
 /hexagonal/input/target
+/hexagonal/input/input.iml
 /hexagonal/domain/target
+/hexagonal/domain/domain.iml
 /hexagonal/ouput/target
+/hexagonal/ouput/ouput.iml
+/hexagonal/code-coverage/target
+/hexagonal/code-coverage/code-coverage.iml
 
