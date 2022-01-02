@@ -15,7 +15,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
-        <jacoco.plugin.version>0.8.7</jacoco.plugin.version>
+<!--        <jacoco.plugin.version>0.8.7</jacoco.plugin.version>-->
     </properties>
     <dependencies>
         <dependency>
@@ -43,7 +43,7 @@
     </dependencies>
 
 
-    <build>
+    <!--<build>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -74,7 +74,7 @@
                             <goal>check</goal>
                         </goals>
                         <configuration>
-                            <!-- Set Rule to fail build if code coverage is below certain threshold -->
+                            &lt;!&ndash; Set Rule to fail build if code coverage is below certain threshold &ndash;&gt;
                             <rules>
                                 <rule implementation="org.jacoco.maven.RuleConfiguration">
                                     <element>BUNDLE</element>
@@ -92,5 +92,5 @@
                 </executions>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 </project>
