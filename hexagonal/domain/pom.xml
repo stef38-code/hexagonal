@@ -33,13 +33,13 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.9</version>
         </dependency>
-        <!-- controle architecture a voir plus tard-->
-        <!--        <dependency>
-                    <groupId>com.tngtech.archunit</groupId>
-                    <artifactId>archunit-junit5</artifactId>
-                    <version>0.22.0</version>
-                    <scope>test</scope>
-                </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.4</version>
+        </dependency>
+
     </dependencies>
 
 

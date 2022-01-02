@@ -76,37 +76,6 @@
     </dependencies>
     <build>
         <plugins>
-           <!-- <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.plugin.version}</version>
-                <configuration>
-                    <dataFile>${sonar.jacoco.reportPath}</dataFile>
-                    <destFile>${sonar.jacoco.reportPath}</destFile>
-                    <append>true</append>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>agent-for-ut</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                        <phase>verify</phase>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
-            </plugin>-->
-            <!-- UNIT test 'mvn clean install' (optionally: -P unit) by default skips Integration tests-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -114,7 +83,7 @@
                 <configuration>
                     <skipTests>${skip.unit.tests}</skipTests>
                     <excludes>
-                        <exclude>**/*IntegrationTest.java</exclude>
+                        <exclude>**/*Integration*.java</exclude>
                     </excludes>
                     <forkCount>1</forkCount>
                 </configuration>
@@ -138,10 +107,6 @@
                                 <include>**/*IntegrationTest.java</include>
                             </includes>
                             <reuseForks>true</reuseForks>
-                            <!-- When running as a Maven plugin, the JaCoCo agent configuration is prepared by invoking the prepare-agent
-                            or prepare-agent-integration goals, before the actual tests are run. This sets a property named argLine which
-                            points to the JaCoCo agent, later passed as a JVM argument to the test runner -->
-                            <argLine>${itCoverageAgent}</argLine>
                         </configuration>
                     </execution>
                 </executions>
@@ -181,4 +146,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

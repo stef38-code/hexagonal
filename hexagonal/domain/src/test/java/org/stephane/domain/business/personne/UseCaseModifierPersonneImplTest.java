@@ -11,7 +11,7 @@ import org.stephane.domain.mock.in.personne.MockModifierReponse;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.BDDAssertions.then;
 
 class UseCaseModifierPersonneImplTest {
     MockModifierPersonneOut mockRepository;
@@ -36,11 +36,11 @@ class UseCaseModifierPersonneImplTest {
         Personne resultat = mockReponse.recuperer();
 
 
-        assertThat(resultat).isNotNull();
-        assertThat(resultat.getId()).isNotBlank();
+        then(resultat).isNotNull();
+        then(resultat.getId()).isNotBlank();
         //controle si les autres propriétés non pas changées
-        assertThat(resultat.getNom()).hasToString(personne.getNom());
-        assertThat(resultat.getPrenom()).hasToString(personne.getPrenom());
-        assertThat(resultat.getDateNaissance()).isEqualTo(personne.getDateNaissance());
+        then(resultat.getNom()).hasToString(personne.getNom());
+        then(resultat.getPrenom()).hasToString(personne.getPrenom());
+        then(resultat.getDateNaissance()).isEqualTo(personne.getDateNaissance());
     }
 }
