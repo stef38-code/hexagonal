@@ -41,11 +41,45 @@
         <skip.unit.tests>false</skip.unit.tests>
         <skip.integration.tests>true</skip.integration.tests>
         <itCoverageAgent></itCoverageAgent>
-        <build-helper-maven-plugin.version>3.1.0</build-helper-maven-plugin.version>
-        <maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>
-        <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
-        <code.coverage.project.folder>${basedir}/../</code.coverage.project.folder>
+
+       <code.coverage.project.folder>${basedir}/../</code.coverage.project.folder>
         <code.coverage.overall.data.folder>${basedir}/target/</code.coverage.overall.data.folder>
+
+        <lombok.version>1.18.22</lombok.version>
+        <mapstruct.version>1.4.2.Final</mapstruct.version>
+
+        <spring-boot.version>2.5.8</spring-boot.version>
+        <spring-boot-starter-parent.version>2.5.8</spring-boot-starter-parent.version>
+
+        <junit-jupiter.version>5.7.2</junit-jupiter.version>
+        <junit-jupiter-engine.version>5.8.2</junit-jupiter-engine.version>
+
+
+        <jacoco.plugin.version>0.8.7</jacoco.plugin.version>
+        <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
+
+        <validation-api.version>2.0.1.Final</validation-api.version>
+        <jackson-annotations.version>2.13.1</jackson-annotations.version>
+        <jackson-datatype-jsr310.version>2.13.1</jackson-datatype-jsr310.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
+
+        <build-helper-maven-plugin.version>3.2.0</build-helper-maven-plugin.version>
+
+        <maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>
+        <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+
+        <!-- -->
+
+        <hamcrest-core.version>2.2</hamcrest-core.version>
+        <assertj-core.version>3.21.0</assertj-core.version>
+        <mockito-core.version>4.0.0</mockito-core.version>
+
+        <byte-buddy.version>1.11.22</byte-buddy.version>
+        <byte-buddy-agent.version>1.11.22</byte-buddy-agent.version>
+        <spring-orm.version>5.3.14</spring-orm.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -70,7 +104,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.7.2</version>
+            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -79,7 +113,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M4</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <skipTests>${skip.unit.tests}</skipTests>
                     <excludes>
@@ -116,7 +150,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.4</version>
+                <version>3.0.5</version>
             </plugin>
 
             <!-- jacoco agent for code coverage -->
