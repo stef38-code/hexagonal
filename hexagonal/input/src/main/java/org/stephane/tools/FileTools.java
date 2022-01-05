@@ -22,7 +22,6 @@ public class FileTools {
      *
      * @param fileName path du fichier
      * @return retourne le contenu du fichier
-     * @throws IOException if read fails for any reason
      */
     public static Optional<String> getResourceFileAsString(String fileName)  {
         String value = null;

@@ -3,8 +3,8 @@ package org.stephane.output.mapper.factory;
 import java.util.List;
 
 /**
- * @param <O>
- * @param <D>
+ * O obj ouput
+ * D obj domain
  */
 public interface ServiceMapperEntity<O, D> {
     O toOutput(D in);

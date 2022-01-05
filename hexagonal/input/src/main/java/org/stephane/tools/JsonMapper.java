@@ -16,10 +16,10 @@ import java.util.Optional;
 
 /**
  * Classe de mapping json
- * - obj -> json
- * - json -> obj
- * - fichier json -> obj
- * - obj -> fichier json
+ * - obj vers json
+ * - json vers obj
+ * - fichier json vers obj
+ * - obj vers fichier json
  */
 @Slf4j
 public class JsonMapper {
@@ -37,7 +37,7 @@ public class JsonMapper {
      * Convertir un objet en une string json
      *
      * @param value l'objet a convertir
-     * @return Option<String> si conversion réussit
+     * @return Optional de string String si conversion réussit
      */
     public static Optional<String> toString(final Object value) {
         String string = null;
@@ -71,7 +71,7 @@ public class JsonMapper {
      * @param contentJson le contenu json
      * @param valueType       le type de la classe qui compose la liste
      * @param <T>         le type de la classe qui compose la liste
-     * @return retourne optional de List<T>
+     * @return retourne optional de List
      */
     public static <T> Optional<List<T>> toObjectList(String contentJson, Class<T> valueType) {
         ObjectMapper mapper = getObjectMapper();
@@ -111,7 +111,7 @@ public class JsonMapper {
      * @param valueType le type de l'objet
      * @param nomFichier le path du fichier
      * @param <T> le type de l'objet
-     * @return Optional<T>
+     * @return Optional avec un obj T
      */
     public static <T> Optional<T> fileToObject(Class<T> valueType, String nomFichier) {
         Optional<String> content = FileTools.getResourceFileAsString(nomFichier);
@@ -122,11 +122,11 @@ public class JsonMapper {
     }
 
     /**
-     * convertir le contenu du fichier json en List<T>
+     * convertir le contenu du fichier json en List de T
      * @param valueType valueType le type de l'objet contenu dans la list
      * @param nomFichier path du fichier
      * @param <T> valueType le type de l'objet contenu dans la list
-     * @return Optional<List<T>>
+     * @return Une liste de type T dans un Optional
      */
     public static <T> Optional<List<T>> fileToListObject(Class<T> valueType, String nomFichier) {
         Optional<String> content = FileTools.getResourceFileAsString(nomFichier);
