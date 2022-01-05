@@ -18,7 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.*;
+import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -71,10 +71,35 @@ class PersonneControllerTest {
         assertThat(responseEntity).isNotNull();
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         Collection<PersonneDto> body = responseEntity.getBody();
-        assertThat(body).isNotNull().isNotEmpty().hasSize(10);
+        then(body).isNotNull().isNotEmpty().hasSize(10);
     }
 
+    @Test
+    void editer_Lorsque_passeUnId_Attend_unePersonne() {
+        //Conditions préalables (given)
+        String idPersonne = "b4af4660-fef6-4727-bc6f-504cacfd282c";
+        Optional<List<PersonneDto>> fileContent = JsonMapper.fileToListObject(PersonneDto.class, "personnes.json");
+        assertThat(fileContent).isPresent();
+        listPersonneDto = fileContent.get();
+        PersonneDto personne = listPersonneDto.stream()
+                .filter(customer -> idPersonne.equals(customer.getId()))
+                .findAny()
+                .orElse(null);
 
+        given(selectionnerService.executer(ArgumentMatchers.anyString())).willReturn(personne);
+        //Une action se produit (when)
+        ResponseEntity<PersonneDto> responseEntity = controller.editer(idPersonne);
+        //Vérifier la sortie (then)
+        then(personne).isNotNull();
+        then(responseEntity).isNotNull();
+        then(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        PersonneDto body = responseEntity.getBody();
+        then(body).isNotNull();
+        then(body.getId()).hasToString(idPersonne);
+        then(body.getNom()).hasToString("brillant");
+        then(body.getPrenom()).hasToString("Souris");
+        then(body.getAdresses()).hasSize(1);
+    }
 
 
 }
