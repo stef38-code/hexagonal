@@ -13,6 +13,7 @@ import org.stephane.output.repository.PersonneEntityRepository;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -29,7 +30,7 @@ class AjouterPersonneOutImplTest {
     @Test
     void execute_retourneNull_Quand_ParamNull() {
         Personne personne = ajouterPersonne.execute(null);
-        Assertions.assertThat(personne).isNull();
+        then(personne).isNull();
     }
 
     @Test
@@ -50,7 +51,7 @@ class AjouterPersonneOutImplTest {
         given(repository.save(ArgumentMatchers.<PersonneEntity>any())).willReturn(personneMock);
 
         Personne personne = ajouterPersonne.execute(personneIn);
-        Assertions.assertThat(personne).isNotNull();
-        Assertions.assertThat(personne.getId()).isNotEmpty().hasToString(id);
+        then(personne).isNotNull();
+        then(personne.getId()).isNotEmpty().hasToString(id);
     }
 }
