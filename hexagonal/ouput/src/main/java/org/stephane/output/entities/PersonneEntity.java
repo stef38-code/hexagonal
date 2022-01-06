@@ -38,7 +38,7 @@ public class PersonneEntity extends Auditable<String> implements Serializable {
     @Column(name = "datenaissance")
     private LocalDate dateNaissance;
 
-    @ManyToMany(targetEntity = AdresseEntity.class, cascade = {
+    @ManyToMany(fetch = FetchType.EAGER,targetEntity = AdresseEntity.class, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
