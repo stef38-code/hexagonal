@@ -14,7 +14,6 @@ import org.stephane.tools.JsonMapper;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
