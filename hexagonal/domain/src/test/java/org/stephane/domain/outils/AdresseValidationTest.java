@@ -10,6 +10,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
+import static org.assertj.core.api.BDDAssertions.then;
 
 class AdresseValidationTest {
     private Map<String,String> erreurs;
@@ -34,6 +35,6 @@ class AdresseValidationTest {
     void valideCodePostal() {
         StringBuilder sb = new StringBuilder();
         AdresseValidation.valideCodePostal("code postal", "75001", erreurs);
-        assertThat(sb).isEmpty();
+        then(sb).isEmpty();
     }
 }

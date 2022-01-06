@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>code-coverage</artifactId>
     <packaging>pom</packaging>
-    <name>Code coverage Project</name>
+    <name>Couverture du code par les tests</name>
     <description>Module de couverture du projet</description>
     <!-- ===== Informations générales ===== -->
     <url>http://maven.apache.org</url>

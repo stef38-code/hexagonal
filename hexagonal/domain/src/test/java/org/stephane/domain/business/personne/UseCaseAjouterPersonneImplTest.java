@@ -5,14 +5,15 @@ import org.junit.jupiter.api.Test;
 import org.stephane.domain.business.UseCaseAjouter;
 import org.stephane.domain.entities.Personne;
 import org.stephane.domain.entities.PersonneBuilder;
-import org.stephane.domain.mock.in.personne.MockAjouterReponse;
 import org.stephane.domain.mock.in.personne.MockAjouterPersonne;
+import org.stephane.domain.mock.in.personne.MockAjouterReponse;
 import org.stephane.domain.port.in.AjouterReponse;
 import org.stephane.domain.port.out.AjouterOut;
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.BDDAssertions.then;
 
 class UseCaseAjouterPersonneImplTest {
     AjouterOut<Personne> mockRepository;
@@ -36,11 +37,11 @@ class UseCaseAjouterPersonneImplTest {
         Personne resultat = mockReponse.recuperer();
 
 
-        assertThat(resultat).isNotNull();
-        assertThat(resultat.getId()).isNotBlank();
+        then(resultat).isNotNull();
+        then(resultat.getId()).isNotBlank();
         //controle si les autres propriétés non pas changées
-        assertThat(resultat.getNom()).hasToString(personne.getNom());
-        assertThat(resultat.getPrenom()).hasToString(personne.getPrenom());
-        assertThat(resultat.getDateNaissance()).isEqualTo(personne.getDateNaissance());
+        then(resultat.getNom()).hasToString(personne.getNom());
+        then(resultat.getPrenom()).hasToString(personne.getPrenom());
+        then(resultat.getDateNaissance()).isEqualTo(personne.getDateNaissance());
     }
 }

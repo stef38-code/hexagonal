@@ -8,57 +8,58 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
+import static org.assertj.core.api.BDDAssertions.then;
 
 class OutilsValidationTest {
-    private Map<String,String> erreurs;
+    private Map<String, String> erreurs;
 
     @BeforeEach
     void setUp() {
         erreurs = new HashMap<>();
     }
+
     @ParameterizedTest
-    @CsvSource( {
+    @CsvSource({
             "nom,,Le nom est obligatoire !!",
             "surnom,'',Le surnom ne peut pas être vide !!",
-    } )
-    void notNullNotEmpty(String champ,String value,String message) {
+    })
+    void notNullNotEmpty(String champ, String value, String message) {
         OutilsValidation.notNullNotEmpty(champ, value, erreurs);
         OutilsValidation.notNullNotEmpty("champ", "value", erreurs);
-        assertThat(erreurs).isNotEmpty().hasSize(1).containsOnly(entry(champ, message));
+        then(erreurs).isNotEmpty().hasSize(1).containsOnly(entry(champ, message));
     }
 
     @ParameterizedTest
-    @CsvSource( {
+    @CsvSource({
             "nom,,Le nom est obligatoire !!"
-    } )
-    void notNull(String champ,String value,String message) {
+    })
+    void notNull(String champ, String value, String message) {
         OutilsValidation.notNull("nom", value, erreurs);
         OutilsValidation.notNullNotEmpty("champ", "value", erreurs);
-        assertThat(erreurs).isNotEmpty().hasSize(1).containsOnly(entry(champ, message));
+        then(erreurs).isNotEmpty().hasSize(1).containsOnly(entry(champ, message));
     }
 
     @ParameterizedTest
-    @CsvSource( {
+    @CsvSource({
             "nom,'',Le nom ne peut pas être vide !!"
-    } )
-    void notEmpty(String champ,String value,String message) {
+    })
+    void notEmpty(String champ, String value, String message) {
         OutilsValidation.notEmpty(champ, value, erreurs);
         OutilsValidation.notNullNotEmpty("champ", "value", erreurs);
-        assertThat(erreurs).isNotEmpty().hasSize(1).containsOnly(entry(champ, message));
+        then(erreurs).isNotEmpty().hasSize(1).containsOnly(entry(champ, message));
     }
 
 
     @Test
     void isNotEmpty() {
-        assertThat(OutilsValidation.isNotEmpty("")).isFalse();
-        assertThat(OutilsValidation.isNotEmpty("azerty")).isTrue();
+        then(OutilsValidation.isNotEmpty("")).isFalse();
+        then(OutilsValidation.isNotEmpty("azerty")).isTrue();
     }
 
     @Test
     void isNotNull() {
-        assertThat(OutilsValidation.isNotNull(null)).isFalse();
-        assertThat(OutilsValidation.isNotNull("azerty")).isTrue();
+        then(OutilsValidation.isNotNull(null)).isFalse();
+        then(OutilsValidation.isNotNull("azerty")).isTrue();
     }
 }

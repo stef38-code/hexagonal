@@ -1,25 +1,17 @@
 package org.stephane.domain.business.personne;
 
-import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.stephane.domain.business.UseCaseAjouter;
 import org.stephane.domain.business.UseCaseSelectionner;
 import org.stephane.domain.entities.Personne;
-import org.stephane.domain.entities.PersonneBuilder;
-import org.stephane.domain.mock.in.personne.MockAjouterPersonne;
-import org.stephane.domain.mock.in.personne.MockAjouterReponse;
 import org.stephane.domain.mock.in.personne.MockSelectionnerPersonne;
 import org.stephane.domain.mock.in.personne.MockSelectionnerReponse;
-import org.stephane.domain.port.in.AjouterReponse;
 import org.stephane.domain.port.in.SelectionnerReponse;
-import org.stephane.domain.port.out.AjouterOut;
 import org.stephane.domain.port.out.SelectionnerOut;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.BDDAssertions.then;
 
 class UseCaseSelectionnerPersonneImplTest {
