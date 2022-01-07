@@ -6,10 +6,8 @@ import org.mockito.ArgumentMatchers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.stephane.in.dto.PersonneDto;
-import org.stephane.in.service.personne.AjouterServicePersonne;
-import org.stephane.in.service.personne.AjouterServicePersonneImpl;
-import org.stephane.in.service.personne.SelectionnerServicePersonne;
-import org.stephane.in.service.personne.SelectionnerServicePersonneImpl;
+import org.stephane.in.service.personne.selectionner.Service;
+import org.stephane.in.service.personne.selectionner.ServiceImpl;
 import org.stephane.tools.JsonMapper;
 
 import java.util.Collection;
@@ -26,15 +24,16 @@ class PersonneControllerTest {
     //obj retouné par le mock
     PersonneDto personneDto;
     List<PersonneDto> listPersonneDto;
-    private SelectionnerServicePersonne selectionnerService;
-    private AjouterServicePersonne ajouterService;
+    private Service selectionnerService;
+    private org.stephane.in.service.personne.ajouter.Service ajouterService;
     private PersonneController controller;
     private JsonMapper jsonMapper;
+
     @BeforeEach
     void setUp() {
         jsonMapper = new JsonMapper();
-        ajouterService = mock(AjouterServicePersonneImpl.class);
-        selectionnerService = mock(SelectionnerServicePersonneImpl.class);
+        ajouterService = mock(org.stephane.in.service.personne.ajouter.ServiceImpl.class);
+        selectionnerService = mock(ServiceImpl.class);
         controller = new PersonneController(ajouterService, selectionnerService);
         personneDto = new PersonneDto();
     }

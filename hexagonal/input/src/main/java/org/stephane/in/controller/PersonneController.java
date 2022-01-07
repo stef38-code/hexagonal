@@ -7,8 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.stephane.in.dto.PersonneDto;
-import org.stephane.in.service.personne.AjouterServicePersonne;
-import org.stephane.in.service.personne.SelectionnerServicePersonne;
+import org.stephane.in.service.personne.selectionner.Service;
 
 import javax.validation.Valid;
 import java.util.Collection;
@@ -21,8 +20,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class PersonneController {
-    private final AjouterServicePersonne ajouterService;
-    private final SelectionnerServicePersonne selectionnerService;
+    private final org.stephane.in.service.personne.ajouter.Service ajouterService;
+    private final Service selectionnerService;
 
     @PostMapping
     public ResponseEntity<PersonneDto> enregistrer(@Valid @RequestBody PersonneDto personneDto) {

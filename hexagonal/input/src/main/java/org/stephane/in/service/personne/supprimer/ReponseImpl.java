@@ -1,4 +1,4 @@
-package org.stephane.in.service.personne;
+package org.stephane.in.service.personne.supprimer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -6,7 +6,7 @@ import org.stephane.domain.port.in.personne.SupprimerReponsePersonne;
 
 @Component
 @Slf4j
-public class SupprimerReponsePersonneImpl extends SupprimerReponsePersonne {
+public class ReponseImpl extends SupprimerReponsePersonne {
     private boolean resultat;
 
     @Override

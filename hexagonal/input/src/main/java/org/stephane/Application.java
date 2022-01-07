@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.stephane.in.dto.PersonneDto;
-import org.stephane.in.service.personne.AjouterServicePersonne;
+import org.stephane.in.service.personne.ajouter.Service;
 import org.stephane.tools.GenererAdresse;
 import org.stephane.tools.GenererPersonne;
 
@@ -28,7 +28,7 @@ public class Application {
     }
 
     @Bean
-    CommandLineRunner init(AjouterServicePersonne personneRepro) {
+    CommandLineRunner init(Service personneRepro) {
         LocalDate startDate = LocalDate.of(1945, 1, 1);
         LocalDate endDate = LocalDate.of(2000, 12, 31);
         GenererPersonne genererPersonne = new GenererPersonne();

@@ -1,4 +1,4 @@
-package org.stephane.in.service.personne;
+package org.stephane.in.service.personne.selectionner;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Component
 @Slf4j
-public class SelectionnerReponsePersonneImpl extends SelectionnerReponsePersonne {
+public class ReponseImpl extends SelectionnerReponsePersonne {
     private List<Personne> personnes;
     @Override
     public void donnee(Personne resultat) {

@@ -1,16 +1,15 @@
-package org.stephane.in.service.personne;
+package org.stephane.in.service.personne.supprimer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 import org.stephane.domain.port.out.personne.SupprimerPersonneOut;
 import org.stephane.in.dto.PersonneDto;
 
-@Service
+@org.springframework.stereotype.Service
 @RequiredArgsConstructor
 @Slf4j
-public class SupprimerServicePersonneImpl extends SupprimerServicePersonne {
-    private final SupprimerServicePersonne reponse;
+public class ServiceImpl extends Service {
+    private final Service reponse;
     private final SupprimerPersonneOut supprimer;
 
     @Override

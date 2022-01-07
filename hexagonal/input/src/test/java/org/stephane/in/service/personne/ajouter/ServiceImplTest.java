@@ -1,4 +1,4 @@
-package org.stephane.in.service.personne;
+package org.stephane.in.service.personne.ajouter;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,21 +21,21 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
 
-class AjouterServicePersonneImplTest {
+class ServiceImplTest {
 
 
     private AjouterReponsePersonne reponse;
     private PersonneEntityRepository repository;
     private AjouterPersonneOut ajouter;
-    private AjouterServicePersonne servicePersonne;
+    private Service servicePersonne;
 
 
     @BeforeEach
     void setUp() {
         repository = mock(PersonneEntityRepository.class);
         ajouter = new AjouterPersonneOutImpl(repository);
-        reponse = new AjouterReponsePersonneImpl();
-        servicePersonne = new AjouterServicePersonneImpl(reponse, ajouter);
+        reponse = new ReponseImpl();
+        servicePersonne = new ServiceImpl(reponse, ajouter);
     }
 
     @Test

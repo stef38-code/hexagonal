@@ -1,4 +1,4 @@
-package org.stephane.in.service.personne;
+package org.stephane.in.service.personne.ajouter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,7 @@ import org.stephane.domain.port.in.personne.AjouterReponsePersonne;
 
 @Component
 @Slf4j
-public class AjouterReponsePersonneImpl extends AjouterReponsePersonne {
+public class ReponseImpl extends AjouterReponsePersonne {
     private Personne resultat;
 
     @Override

@@ -1,8 +1,7 @@
-package org.stephane.in.service.personne;
+package org.stephane.in.service.personne.ajouter;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 import org.stephane.domain.business.UseCaseAjouter;
 import org.stephane.domain.business.personne.UseCaseAjouterPersonneImpl;
 import org.stephane.domain.entities.Personne;
@@ -11,10 +10,10 @@ import org.stephane.domain.port.out.personne.AjouterPersonneOut;
 import org.stephane.in.dto.PersonneDto;
 import org.stephane.in.mapper.factory.TypeServiceMapperDto;
 
-@Service
+@org.springframework.stereotype.Service
 @RequiredArgsConstructor
 @Slf4j
-public class AjouterServicePersonneImpl extends AjouterServicePersonne {
+public class ServiceImpl extends Service {
     private final AjouterReponsePersonne reponse;
     private final AjouterPersonneOut ajouter;
 
