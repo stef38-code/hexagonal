@@ -41,7 +41,7 @@ class PersonneControllerIntegrationTest extends ControllerIntegrationTest {
         actualPerformResult.andExpect(MockMvcResultMatchers.status().is(200));
         String contentAsString = getContent(actualPerformResult);
         then(contentAsString).isNotBlank();
-        Optional<List<PersonneDto>> resultat = JsonMapper.toObjectList(contentAsString, PersonneDto.class);
+        Optional<List<PersonneDto>> resultat = toObjectList(contentAsString, PersonneDto.class);
         then(resultat).isPresent();
         List<PersonneDto> personneDtos = resultat.get();
         assertThat(personneDtos).hasSize(10);
@@ -60,7 +60,7 @@ class PersonneControllerIntegrationTest extends ControllerIntegrationTest {
         actualPerformResult.andExpect(MockMvcResultMatchers.status().is(200));
         String contentAsString = getContent(actualPerformResult);
         then(contentAsString).isNotBlank();
-        Optional<PersonneDto> resultat = JsonMapper.toObject(contentAsString, PersonneDto.class);
+        Optional<PersonneDto> resultat = toObject(contentAsString, PersonneDto.class);
         then(resultat).isPresent();
         PersonneDto personneDto = resultat.get();
         then(personneDto.getId()).isNotEmpty();

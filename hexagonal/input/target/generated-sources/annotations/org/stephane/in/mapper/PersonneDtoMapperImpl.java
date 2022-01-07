@@ -12,8 +12,8 @@ import org.stephane.in.dto.PersonneDto;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-01-05T15:35:05+0100",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.8 (Azul Systems, Inc.)"
+    date = "2022-01-06T16:02:00+0100",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.12 (Azul Systems, Inc.)"
 )
 public class PersonneDtoMapperImpl extends PersonneDtoMapper {
 

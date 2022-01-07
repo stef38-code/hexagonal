@@ -18,8 +18,11 @@ class JsonMapperTest {
     private PersonneDto personneDto2;
     private List<PersonneDto> personneDtoList;
 
+    private JsonMapper jsonMapper;
+
     @BeforeEach
     void setUp() {
+        jsonMapper = new JsonMapper();
         startDate = LocalDate.of(1945, 1, 1);
         endDate = LocalDate.of(2000, 12, 31);
         personneDto = genererPersonne.generer(startDate, endDate);
@@ -29,7 +32,7 @@ class JsonMapperTest {
 
     @Test
     void toString_UnObjet() {
-        Optional<String> actualToStringResult = JsonMapper.toString(personneDto);
+        Optional<String> actualToStringResult = jsonMapper.toString(personneDto);
         assertThat(actualToStringResult).isPresent();
         assertThat(actualToStringResult.get())
                 .contains(personneDto.getNom())
@@ -38,7 +41,7 @@ class JsonMapperTest {
     }
     @Test
     void toString_UneListObjet() {
-        Optional<String> actualToStringResult = JsonMapper.toString(personneDtoList);
+        Optional<String> actualToStringResult = jsonMapper.toString(personneDtoList);
         assertThat(actualToStringResult).isPresent();
         assertThat(actualToStringResult.get())
                 .contains(personneDto.getNom())
@@ -50,10 +53,10 @@ class JsonMapperTest {
     }
     @Test
     void toObject() {
-        assertThat(JsonMapper.toObject("Not all who wander are lost", Object.class)).isNotPresent();
-        assertThat(JsonMapper.toObject("42", String.class)).isPresent();
-        assertThat(JsonMapper.toObject("", Object.class)).isNotPresent();
-        Optional<PersonneDto> actual = JsonMapper.toObject("{\"id\":null,\"nom\":\"compétent\",\"prenom\":\"Koala\",\"dateNaissance\":\"1974-08-07\",\"adresses\":[]}", PersonneDto.class);
+        assertThat(jsonMapper.toObject("Not all who wander are lost", Object.class)).isNotPresent();
+        assertThat(jsonMapper.toObject("42", String.class)).isPresent();
+        assertThat(jsonMapper.toObject("", Object.class)).isNotPresent();
+        Optional<PersonneDto> actual = jsonMapper.toObject("{\"id\":null,\"nom\":\"compétent\",\"prenom\":\"Koala\",\"dateNaissance\":\"1974-08-07\",\"adresses\":[]}", PersonneDto.class);
         assertThat(actual).isPresent();
         PersonneDto dto = actual.get();
         assertThat(dto.getNom()).hasToString("compétent");
@@ -64,8 +67,8 @@ class JsonMapperTest {
 
     @Test
     void toObjectList() {
-        assertThat(JsonMapper.toObjectList("Not all who wander are lost", Object.class)).isNotPresent();
-        Optional<List<PersonneDto>> resultat = JsonMapper.toObjectList("[{\"id\":null,\"nom\":\"exemplaire\",\"prenom\":\"Iguane\",\"dateNaissance\":\"1957-05-02\",\"adresses\":[]},{\"id\":null,\"nom\":\"lisse\",\"prenom\":\"Lapin\",\"dateNaissance\":\"1972-08-26\",\"adresses\":[]}]", PersonneDto.class);
+        assertThat(jsonMapper.toObjectList("Not all who wander are lost", Object.class)).isNotPresent();
+        Optional<List<PersonneDto>> resultat = jsonMapper.toObjectList("[{\"id\":null,\"nom\":\"exemplaire\",\"prenom\":\"Iguane\",\"dateNaissance\":\"1957-05-02\",\"adresses\":[]},{\"id\":null,\"nom\":\"lisse\",\"prenom\":\"Lapin\",\"dateNaissance\":\"1972-08-26\",\"adresses\":[]}]", PersonneDto.class);
         assertThat(resultat).isPresent();
         List<PersonneDto> dtoList = resultat.get();
         assertThat(dtoList).isNotEmpty().hasSize(2);
@@ -81,19 +84,19 @@ class JsonMapperTest {
 
     @Test
     void testObjectToFile() {
-        assertThat(JsonMapper.objectToFile("Obj", "Nom Fichier")).isFalse();
+        assertThat(jsonMapper.objectToFile("Obj", "Nom Fichier")).isFalse();
     }
 
     @Test
     void testFileToObject() {
-        assertThat(JsonMapper.fileToObject(Object.class, "Nom Fichier")).isNotPresent();
-        assertThat(JsonMapper.fileToObject(Object.class, "")).isNotPresent();
+        assertThat(jsonMapper.fileToObject(Object.class, "Nom Fichier")).isNotPresent();
+        assertThat(jsonMapper.fileToObject(Object.class, "")).isNotPresent();
     }
 
     @Test
     void testFileToListObject() {
-        assertThat(JsonMapper.fileToListObject(Object.class, "Nom Fichier")).isNotPresent();
-        assertThat(JsonMapper.fileToListObject(Object.class, "")).isNotPresent();
+        assertThat(jsonMapper.fileToListObject(Object.class, "Nom Fichier")).isNotPresent();
+        assertThat(jsonMapper.fileToListObject(Object.class, "")).isNotPresent();
     }
 }
 

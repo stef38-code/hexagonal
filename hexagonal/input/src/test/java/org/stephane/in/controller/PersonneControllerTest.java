@@ -29,9 +29,10 @@ class PersonneControllerTest {
     private SelectionnerServicePersonne selectionnerService;
     private AjouterServicePersonne ajouterService;
     private PersonneController controller;
-
+    private JsonMapper jsonMapper;
     @BeforeEach
     void setUp() {
+        jsonMapper = new JsonMapper();
         ajouterService = mock(AjouterServicePersonneImpl.class);
         selectionnerService = mock(SelectionnerServicePersonneImpl.class);
         controller = new PersonneController(ajouterService, selectionnerService);
@@ -40,7 +41,7 @@ class PersonneControllerTest {
 
     @Test
     void enregistrer_Retourne_UnePersonne_Quand_Ajout_UnePersonne() {
-        Optional<PersonneDto> fileContent = JsonMapper.fileToObject(PersonneDto.class, "personne.json");
+        Optional<PersonneDto> fileContent = jsonMapper.fileToObject(PersonneDto.class, "personne.json");
         assertThat(fileContent).isPresent();
         personneDto = fileContent.get();
         //
@@ -59,7 +60,7 @@ class PersonneControllerTest {
 
     @Test
     void lister_Retourne_laListeDesPersonnes() {
-        Optional<List<PersonneDto>> fileContent = JsonMapper.fileToListObject(PersonneDto.class, "personnes.json");
+        Optional<List<PersonneDto>> fileContent = jsonMapper.fileToListObject(PersonneDto.class, "personnes.json");
         assertThat(fileContent).isPresent();
         listPersonneDto = fileContent.get();
         //
@@ -77,7 +78,7 @@ class PersonneControllerTest {
     void editer_Lorsque_passeUnId_Attend_unePersonne() {
         //Conditions préalables (given)
         String idPersonne = "b4af4660-fef6-4727-bc6f-504cacfd282c";
-        Optional<List<PersonneDto>> fileContent = JsonMapper.fileToListObject(PersonneDto.class, "personnes.json");
+        Optional<List<PersonneDto>> fileContent = jsonMapper.fileToListObject(PersonneDto.class, "personnes.json");
         assertThat(fileContent).isPresent();
         listPersonneDto = fileContent.get();
         PersonneDto personne = listPersonneDto.stream()

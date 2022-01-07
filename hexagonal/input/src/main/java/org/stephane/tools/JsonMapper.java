@@ -23,10 +23,10 @@ import java.util.Optional;
  */
 @Slf4j
 public class JsonMapper {
-    private JsonMapper() {
+    public JsonMapper() {
     }
 
-    private static ObjectMapper getObjectMapper() {
+    private ObjectMapper getObjectMapper() {
         return new ObjectMapper()
                 .registerModule(new JavaTimeModule())
                 .registerModule(new Jdk8Module())
@@ -39,7 +39,7 @@ public class JsonMapper {
      * @param value l'objet a convertir
      * @return Optional de string String si conversion réussit
      */
-    public static Optional<String> toString(final Object value) {
+    public Optional<String> toString(final Object value) {
         String string = null;
         try {
             string = getObjectMapper().writeValueAsString(value);
@@ -56,7 +56,7 @@ public class JsonMapper {
      * @param <T> le type de la classe qui compose le contenu json
      * @return retourne optional de T
      */
-    public static <T> Optional<T> toObject(String contentJson, Class<T> valueType){
+    public <T> Optional<T> toObject(String contentJson, Class<T> valueType){
         T value = null;
         try {
             value = getObjectMapper().readValue(contentJson, valueType);
@@ -73,7 +73,7 @@ public class JsonMapper {
      * @param <T>         le type de la classe qui compose la liste
      * @return retourne optional de List
      */
-    public static <T> Optional<List<T>> toObjectList(String contentJson, Class<T> valueType) {
+    public <T> Optional<List<T>> toObjectList(String contentJson, Class<T> valueType) {
         ObjectMapper mapper = getObjectMapper();
         CollectionType listType = mapper.getTypeFactory()
                 .constructCollectionType(ArrayList.class, valueType);
@@ -93,7 +93,7 @@ public class JsonMapper {
      * @param <T> le type de l'objet
      * @return true si ok sinon false
      */
-    public static <T> boolean objectToFile(T obj, String nomFichier) {
+    public <T> boolean objectToFile(T obj, String nomFichier) {
         Optional<File> fileRessource = FileTools.getFileRessource(nomFichier);
         if(fileRessource.isPresent()){
             try {
@@ -113,7 +113,7 @@ public class JsonMapper {
      * @param <T> le type de l'objet
      * @return Optional avec un obj T
      */
-    public static <T> Optional<T> fileToObject(Class<T> valueType, String nomFichier) {
+    public <T> Optional<T> fileToObject(Class<T> valueType, String nomFichier) {
         Optional<String> content = FileTools.getResourceFileAsString(nomFichier);
         if(content.isPresent()){
             return toObject(content.get(), valueType);
@@ -128,7 +128,7 @@ public class JsonMapper {
      * @param <T> valueType le type de l'objet contenu dans la list
      * @return Une liste de type T dans un Optional
      */
-    public static <T> Optional<List<T>> fileToListObject(Class<T> valueType, String nomFichier) {
+    public <T> Optional<List<T>> fileToListObject(Class<T> valueType, String nomFichier) {
         Optional<String> content = FileTools.getResourceFileAsString(nomFichier);
         if(content.isPresent()){
             return toObjectList(content.get(), valueType);
