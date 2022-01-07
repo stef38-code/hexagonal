@@ -8,15 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.stephane.in.dto.PersonneDto;
 import org.stephane.tools.FileTools;
-import org.stephane.tools.JsonMapper;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,10 +46,7 @@ class PersonneControllerIntegrationTest extends ControllerIntegrationTest {
     @Test
     @Order(2)
     void enregistrer_Retourne_UnePersonne_Quand_Ajout_UnePersonne() throws Exception {
-        Optional<String> value = FileTools.getResourceFileAsString("personne.json");
-
-        assertThat(value).isPresent();
-        String content = value.get();
+        String content = getJsonStringWithFile("personne.json");
         ResultActions actualPerformResult = getResult(MockMvcRequestBuilders.post("/personnes")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content), this.personneController);
@@ -66,15 +59,13 @@ class PersonneControllerIntegrationTest extends ControllerIntegrationTest {
         then(personneDto.getId()).isNotEmpty();
     }
 
+
+
     @Test
     @Order(3)
     void enregistrer_Retourne_400_Quand_Ajout_UnePersonneNonValide() throws Exception {
-        Optional<String> value = FileTools.getResourceFileAsString("personne_error.json");
-        then(value).isPresent();
-        String content = value.get();
-
-        String urlTemplate = "/personnes";
-        ResultActions actualPerformResult = getResult(MockMvcRequestBuilders.post(urlTemplate)
+        String content = getJsonStringWithFile("personne_error.json");
+        ResultActions actualPerformResult = getResult(MockMvcRequestBuilders.post("/personnes")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content), this.personneController);
         actualPerformResult.andExpect(MockMvcResultMatchers.status().is(400));
